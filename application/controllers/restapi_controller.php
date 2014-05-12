@@ -65,12 +65,10 @@ class Restapi_controller extends REST_Controller
 	
 	function collection_get()
 	{
-		$this->load->model('Images_model');
-		
 		$series_id = $_GET["id"];
 		$series = $this->Content_model->get_single_series($series_id);
 		$images = $this->Content_model->get_images($series_id);
-		$author = $this->Content_model->get_owner($series_id);
+		$author = $this->Content_model->get_author($series_id);
 		
 		$stickers = [];
 		foreach ($images as $image)
