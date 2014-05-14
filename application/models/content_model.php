@@ -211,13 +211,14 @@ class Content_model extends CI_Model
 		{
 			//Get the temp file path
 			$tmpFilePath = $image_files["tmp_name"][$i];
+			mb_convert_encoding($tmpFilePath, "BIG5");
 				
 			//Make sure we have a filepath
 			if ($tmpFilePath != "")
 			{
 				//Setup our new file path
-				$newFilePath = $newFileDirectory ."/". $image_files["name"][$i];
-					
+				$newFilePath = $newFileDirectory ."/". mb_convert_encoding($image_files["name"][$i], "BIG5");
+				
 				//Upload the file into the temp dir
 				if(move_uploaded_file($tmpFilePath, $newFilePath))
 				{

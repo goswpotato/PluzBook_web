@@ -12,6 +12,7 @@ class Restapi_controller extends REST_Controller
 		$this->load->helper('url');
 	}
 	
+	
 	function collections_get()
 	{
 		$response=[];
@@ -63,9 +64,8 @@ class Restapi_controller extends REST_Controller
 		$this->response($response, 200);
 	}
 	
-	function collection_get()
+	function collection_get($series_id)
 	{
-		$series_id = $_GET["id"];
 		$series = $this->Content_model->get_single_series($series_id);
 		$images = $this->Content_model->get_images($series_id);
 		$author = $this->Content_model->get_author($series_id);

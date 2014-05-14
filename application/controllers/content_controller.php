@@ -111,6 +111,7 @@ class Content_controller extends CI_Controller
 		$series_id=$_POST["sid"];
 		$image_files = $_FILES["upload_images"];
 		
+		
 		if(count($image_files["name"])>0 && $this->Content_model->add_images($_SESSION["uid"], $_SESSION["email"], $series_id, $image_files)!="")
 		{
 		}
