@@ -86,10 +86,6 @@
 			
 					echo '<div class="thumbnail">';
 						echo '<div class="cap-icons">';
-						
-							//echo '<input type="submit" name="edit" ><span class="glyphicon glyphicon-pencil"></span></input>';							
-							//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
-							
 							echo '<a href=';
 							echo site_url("content_controller/show_series_page/{$item["id"]}");
 							echo ' ><span class="glyphicon glyphicon-pencil"></span></a>';
@@ -97,30 +93,19 @@
 							echo '<a href=';
 							echo site_url("content_controller/delete_series/{$item["id"]}");
 							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
-							
-							
 						echo '</div>';
 						echo '<div class="caption">';
-							/*
-							echo '<h4><input type="submit" name="edit" >';
-							echo $item["name"];
-							echo '</input></h4>';
-							*/
-						
-						
 							echo '<h4><a href=';
 							echo site_url("content_controller/show_series_page/{$item["id"]}");
 							echo ' >';
 							echo $item["name"];
 							echo '</a></h4>';
-							
 						echo '</div>';
 	
 	
 						echo '<a href=';
 						echo site_url("content_controller/show_series_page/{$item["id"]}");
 						echo ' >';
-						//echo '<input type="submit" name="edit" >';
 						
 				if($item["cover_path"]!="")
 				{
@@ -134,13 +119,13 @@
 							echo base_url("public_asset/img/dummy_img.png");
 							echo ' >';
 				}
-						
-						//echo '</input>';
 						echo '</a>';
 					
-					echo '</div>';
+					echo '</div>'; //end of echo <div class="thumbnail">
+					
+					
 				echo '</form>';
-			echo '</div>'; // end of echo '<div class="col-sm-3 col-xs-6">';
+			echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
 			
 				if($i%4==3)
 				{
@@ -207,72 +192,45 @@
 		
 	</div>
 	
-	
 	<!-- others' series -->
 	<div class="container">
-		<?php
-		
+	<?php	
 		$i=0;
 		
 		if(isset($other_series))
 		{
-			
 			foreach ($other_series as $item)
 			{
 				if($i%4==0)
 				{
-		echo '<div class="row">';
+			echo '<div class="row">';
 				}
 				
-			echo '<div class="col-sm-3 col-xs-6">';
-			
-				echo '<form action=';
-				echo site_url("content_controller/series_operation");
-				echo ' method="post" >';
+				echo '<div class="col-sm-3 col-xs-6">';
 				
 					echo '<input type="hidden" name="sid" value=';
 					echo $item["id"];
 					echo '>';
-			
+					
 					echo '<div class="thumbnail">';
 						echo '<div class="cap-icons">';
-						
-							echo '<input type="submit" name="edit" ><span class="glyphicon glyphicon-pencil"></span></input>';							
-							//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
-						
-							/*
 							echo '<a href=';
 							echo site_url("content_controller/show_series_page/{$item["id"]}");
-							echo '><span class="glyphicon glyphicon-pencil"></span></a>';
-							*/
-							
-							/*
-							echo '<a onclick="delete_series(this)" series_id=';
-							echo $item["id"];
-							echo ' site_url=';
-							echo site_url("content_controller/delete_series/");
-							echo '><span class="glyphicon glyphicon-remove"></span></a>';
-							*/
-							
+							echo ' ><span class="glyphicon glyphicon-pencil"></span></a>';
 						echo '</div>';
 						echo '<div class="caption">';
-							echo '<h4><input type="submit" name="edit" >';
-							echo $item["name"];
-							echo '</input></h4>';
-						
-							/*
 							echo '<h4><a href=';
 							echo site_url("content_controller/show_series_page/{$item["id"]}");
-							echo '>';
+							echo ' >';
 							echo $item["name"];
 							echo '</a></h4>';
-							*/
 						echo '</div>';
-	
-	
-						
-						echo '<input type="submit" name="edit" >';
-						
+				
+				
+						echo '<a href=';
+						echo site_url("content_controller/show_series_page/{$item["id"]}");
+						echo ' >';
+				
 				if($item["cover_path"]!="")
 				{
 							echo '<img src=';
@@ -285,52 +243,20 @@
 							echo base_url("public_asset/img/dummy_img.png");
 							echo ' >';
 				}
-						
-						echo '</input>';
+						echo '</a>';
 					
-					echo '</div>';
-				echo '</form>';
-			echo '</div>'; // end of echo '<div class="col-sm-3 col-xs-6">';
-			
+					echo '</div>'; //end of echo <div class="thumbnail">
+				echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
+					
 				if($i%4==3)
 				{
-		echo '</div>'; // end of <div class="row">
+					echo '</div>'; // end of <div class="row">
 				}
 				
 				
 				
 				$i++;
 			}
-		}
-		
-		if($i!=16)
-		{
-			if($i%4==0)
-			{
-		echo '<div class="row">';
-			}
-			
-			
-			if($i==0)
-			{
-				echo '<div class="col-sm-3 col-xs-6" >';
-					echo '<div class="thumbnail">';
-						echo '<div class="cap-icons">';
-							echo '<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>';
-							echo '<a href="#"><span class="glyphicon glyphicon-remove"></span></a>';
-						echo '</div>';
-						echo '<div class="caption">';
-							echo '<h4><a href="series.html">Example</a></h4>';
-						echo '</div>';
-						echo '<a href="series.html"><img src=';
-						echo base_url("public_asset/img/dummy_img.png");
-						echo ' ></a>';
-					echo '</div>';
-				echo '</div>';
-			}
-			
-		echo '</div>'; // end of <div class="row">
-			
 		}
 		
 		

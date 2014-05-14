@@ -73,7 +73,7 @@ class Restapi_controller extends REST_Controller
 		$stickers = [];
 		foreach ($images as $image)
 		{
-			$stickers[$image["description"]] = base_url($image["path"]);
+			$stickers[$image["file_name"]] = base_url($image["path"]);
 		}
 		
 		$response=array(
