@@ -118,14 +118,17 @@ class Content_model extends CI_Model
 		
 		$content_query= $this->db->query(
 			"
-			INSERT INTO series (name, uid, cover_id, cover_path)
-			VALUES ('{$series_name}', {$user_id}, -1, '');
+			INSERT INTO series (name, uid, cover_id, cover_path, public)
+			VALUES ('{$series_name}', {$user_id}, -1, '', 'private');
 			"
 		);
 		
 		if($content_query)
 		{
-			return mkdir("./images/{$user_email}/{$series_name}");
+			$hash_name = md5($series_name);
+			$hash_email = md5($user_email);
+			
+			return mkdir("./images/{$hash_email}/{$hash_name}");
 		}
 		
 		return false;
@@ -156,10 +159,7 @@ class Content_model extends CI_Model
 	}
 	
 	function delete_series($user_id, $user_email, $series_id)
-	{
-		// still needed to be edited
-		// robust???
-		
+	{	
 		$series_name = $this->db->query(
 			"
 			SELECT name
@@ -184,7 +184,9 @@ class Content_model extends CI_Model
 			"
 		);
 		
-		$this->rmdir_fully("./images/{$user_email}/{$series_name}");
+		$hash_name = md5($series_name);
+		$hash_email = md5($user_email);
+		$this->rmdir_fully("./images/{$hash_email}/{$hash_name}");
 	}
 	
 	
@@ -199,39 +201,43 @@ class Content_model extends CI_Model
 		);
 		
 		$series_name=$series_query->row_array()["name"];
+		$hash_name=md5($series_name);
+		$hash_email=md5($user_email);
 		$cover_id=$series_query->row_array()["cover_id"];
 		
 		$value_array=[];
 		$values_str="";
 		
-		//$newFileDirectory = base_url("images/{$user_email}/{$series_name}");
-		$newFileDirectory = "./images/" .$user_email. "/" .$series_name;
+		$newFileDirectory = "./images/" .$hash_email. "/" .$hash_name;
 		
 		for($i=0; $i<count($image_files["name"]); $i++)
 		{
 			//Get the temp file path
 			$tmpFilePath = $image_files["tmp_name"][$i];
-			mb_convert_encoding($tmpFilePath, "BIG5");
+			//mb_convert_encoding($tmpFilePath, "BIG5");
 				
 			//Make sure we have a filepath
 			if ($tmpFilePath != "")
 			{
 				//Setup our new file path
-				$newFilePath = $newFileDirectory ."/". mb_convert_encoding($image_files["name"][$i], "BIG5");
+				//$newFilePath = $newFileDirectory ."/". mb_convert_encoding($image_files["name"][$i], "BIG5");
+				$ext=pathinfo($image_files["name"][$i])["extension"];
+				$new_name=date("YmdHis", time()) . "_" . $i;
+				$newFilePath = "images/" .$hash_email. "/" .$hash_name. "/{$new_name}.". $ext;
 				
 				//Upload the file into the temp dir
-				if(move_uploaded_file($tmpFilePath, $newFilePath))
+				if(move_uploaded_file($tmpFilePath, "./" . $newFilePath))
 				{
-					$path_parts = pathinfo($newFilePath);
+					//$path_parts = pathinfo($newFilePath);
 					
-					$new_name=date("YmdHis", time()) . "_" . $i;
-					$original_name=$path_parts["filename"];
-					$new_path = "images/" .$user_email. "/" .$series_name. "/{$new_name}.". $path_parts["extension"];
+					//$new_name=date("YmdHis", time()) . "_" . $i;
+					$original_name=$image_files["name"][$i];
+					//$new_path = "images/" .$hash_email. "/" .$hash_name. "/{$new_name}.". $path_parts["extension"];
 					
-					rename($newFilePath, $new_path);
+					//rename($newFilePath, $new_path);
 					
 					// (sid, file_name, original_name, ext, path, description)
-					array_push($value_array, "({$series_id}, '{$new_name}', '{$original_name}', '{$path_parts["extension"]}', '{$new_path}', '')");
+					array_push($value_array, "({$series_id}, '{$new_name}', '{$original_name}', '{$ext}', '{$newFilePath}', '')");
 				}
 				else
 				{
@@ -243,7 +249,6 @@ class Content_model extends CI_Model
 		
 		$values_str=join(",", $value_array);
 		
-		//$values_str=substr($values_str, 0, strlen($values_str)-1);
 		$content_query = $this->db->query(
 			"
 			INSERT INTO images (sid, file_name, original_name, ext, path, description)
@@ -259,7 +264,7 @@ class Content_model extends CI_Model
 				FROM images
 				WHERE sid={$series_id};
 				"
-			)->row_array(); // or use row() function???
+			)->row_array();
 			
 			$content_query = $this->db->query(
 				"
@@ -371,8 +376,19 @@ class Content_model extends CI_Model
 	}
 	
 	
-	function change_series_name($series_id, $new_name)
+	function change_series_name($series_id, $new_name, $user_email)
 	{
+		$new_hash=md5($new_name);
+		
+		$old_name=$this->db->query(
+			"
+			SELECT name
+			FROM series
+			WHERE id={$series_id}
+			"
+		)->row_array();
+		$old_hash=md5($old_name["name"]);
+		
 		$this->db->query(
 			"
 			UPDATE series
@@ -380,12 +396,38 @@ class Content_model extends CI_Model
 			WHERE id={$series_id}
 			"
 		);
+		
+		$owner_hash=md5($user_email);
+		
+		rename("images/{$woner_hash}/{$old_hash}/", "images/{$woner_hash}/{$new_hash}/");
+		
+		$images=get_images($series_id);
+		foreach($images as $image)
+		{
+			$this->db->query(
+				"
+				UPDATE images
+				SET path = 'images/{$owner_hash}/{$new_hash}/{$image["file_name"]}.{$image["ext"]}'
+				WHERE id={$image["id"]}
+				"
+			);
+		}
 	}
 	
 	function change_series_cover($series_id, $image_path)
 	{
 	}
 	
+	function change_auth($series_id, $auth)
+	{
+		$this->db->query(
+			"
+			UPDATE series
+			SET public = '{$auth}'
+			WHERE id={$series_id}
+			"
+		);
+	}
 	
 	
 }

@@ -61,7 +61,7 @@ function edit_event()
 */
 
 
-function remove_check()
+function remove_event()
 {
 	if(confirm("Are you sure to delete this image?"))
 	{
@@ -71,9 +71,19 @@ function remove_check()
 	return false;
 }
 
-
+/*
 function edit_name()
 {
+	var original_name, new_name;
+	
+	original_name=$(this).innerHTML;
+	new_name=prompt("Please enter name of series", original_name);
+	
+	if(new_name!=original_name)
+	{
+	}
+	
+	
 	var xmlhttp;
 	if(window.XMLHttpRequest)
 	{// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -91,4 +101,4 @@ function edit_name()
 	//xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send("fname=Henry&lname=Ford");
 }
-
+*/

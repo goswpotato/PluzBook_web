@@ -46,6 +46,18 @@ class Content_controller extends CI_Controller
 	{
 		$data["images"]=$this->Content_model->get_images($series_id);
 		$data["series"]=$this->Content_model->get_single_series($series_id);
+		
+		
+		if($data["series"]["uid"]==$_SESSION["uid"])
+		{
+			$data["is_owner"]=true;
+		}
+		else 
+		{
+			$data["is_owner"]=false;
+		}
+		
+		
 		$this->load->view("series", $data);
 	}
 	
@@ -53,8 +65,6 @@ class Content_controller extends CI_Controller
 	
 	function new_series()
 	{
-		// still needed to be edited
-		
 		$name=$_POST["new_series_name"];
 		if(!$this->Content_model->new_series($_SESSION["uid"], $_SESSION["email"], $name))
 		{
@@ -94,8 +104,6 @@ class Content_controller extends CI_Controller
 	
 	function delete_series($series_id)
 	{
-		// still needed to be edited
-		
 		if($this->Content_model->delete_series($_SESSION["uid"], $_SESSION["email"], $series_id))
 		{
 		}
@@ -152,17 +160,24 @@ class Content_controller extends CI_Controller
 	
 	function change_series_name()
 	{
-		$series_id=$_POST["series_id"];
+		$series_id=$_POST["sid"];
 		$new_name=$_POST["name"]; // use post?????
 		
-		$this->Content_model->change_series_name($series_id, $new_name);
-		
-		redirect("content_controller/show_series_page/{$series_id}", "refresh");
+		$this->Content_model->change_series_name($series_id, $new_name, $_SESSION["email"]);
 	}
 	
 	function change_series_cover()
 	{
 	}
+	
+	function change_auth()
+	{
+		$series_id=$_POST["sid"];
+		$auth=$_POST["auth"];
+		
+		$this->Content_model->change_auth($series_id, $auth);
+	}
+	
 }
 
 ?>

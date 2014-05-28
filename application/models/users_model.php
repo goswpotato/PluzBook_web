@@ -68,8 +68,9 @@ class Users_model extends CI_Model
 		if($user_query)
 		{
 			// is this the right way to check insertion success or not??
+			$hash_email = md5($email);
 			
-			if(!mkdir("./images/{$email}"))
+			if(!mkdir("./images/{$hash_email}"))
 			{
 				// enough??
 				return "something wrong on server";

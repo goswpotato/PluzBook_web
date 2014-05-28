@@ -17,15 +17,6 @@ function series_operation()
 	return false;
 }
 
-
-function edit_event()
-{
-	
-}
-
-
-
-
 function remove_event()
 {
 	if(confirm("Are you sure to delete this series?"))

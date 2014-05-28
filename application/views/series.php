@@ -16,9 +16,8 @@
 	<script src=<?php echo base_url("public_asset/js/series.js"); ?>></script>
 
 	<script>
-
 	$(document).ready(function(){
-	  $imgHeight = $(".thumbnail img").height();
+		$imgHeight = $(".thumbnail img").height();
 		$(".upload input[type='submit']").height($imgHeight-5);
 
 		$(window).resize(function() {
@@ -27,7 +26,6 @@
 		});
 
 
-		//$("input[name='edit']").click(edit_event);
 		$("a[name='edit']").click(
 			function(event)
 			{
@@ -88,9 +86,102 @@
 				
 			}
 		);
+
 		
-		$("a[name='remove']").click(remove_check);
-		//$("#series_name").click(edit_name);
+		$("a[name='remove']").click(remove_event);
+		
+		<?php
+		if(isset($is_owner) && $is_owner)
+		{
+		?>
+		
+		$("#series_name").click(
+			function(event)
+			{
+				var original_name, new_name, action_url, series_id;
+				
+				original_name=$(this).innerHTML;
+				new_name=prompt("Please enter name of series", original_name);
+				action_url="<?php echo site_url("content_controller/change_series_name"); ?>";
+				series_id=<?php echo $series["id"]; ?>;
+
+				if(new_name!=original_name)
+				{
+					$.ajax(
+						{
+							url: action_url,
+							data: {sid: series_id, name: new_name},
+							type: "POST",
+							async: true,
+							dataType: "text",
+							success: function()
+							{
+								$("#series_name").html(new_name);
+							},
+							error: function(xhr, ajaxOptions, thrownError)
+							{
+								//textarea_object.val(textarea_object.attr("temp_save"));
+							},
+						
+						}
+					);
+				}
+			}
+		);
+		
+		<?php
+		} // end of if(isset($is_owner) && $is_owner)
+		?>
+		
+		
+		var auth = "<?php echo $series["public"]; ?>";
+		
+		if(auth=="public")
+		{
+			$("#public_select").val(0);
+		}
+		else if(auth=="private")
+		{
+			$("#public_select").val(1);
+		}
+		else if(auth=="editable")
+		{
+			$("#public_select").val(2);
+		}
+		else if(auth=="deletable")
+		{
+			$("#public_select").val(3);
+		}
+		
+		
+		$("#public_select").change(
+			function()
+			{
+				action_url="<?php echo site_url("content_controller/change_auth"); ?>";
+				series_id=<?php echo $series["id"]; ?>;
+				
+				$.ajax(
+					{
+						url: action_url,
+						data: {sid: series_id, auth: $(this).find(":selected").text()},
+						type: "POST",
+						async: true,
+						dataType: "text",
+						success: function()
+						{
+							//alert("success");
+						},
+						error: function(xhr, ajaxOptions, thrownError)
+						{
+							//var err = eval("(" + xhr.responseText + ")");
+							alert(xhr.responseText);
+						},
+					
+					}
+				);
+			}
+		);
+		
 	});
 	
 	</script>
@@ -132,6 +223,26 @@
 					<br/>
 					<input type="submit" value="Upload" style="color: #aaa; background: #fff; border: #ccc 1px solid; border-radius: 3px; width: 80px; height: 40px;">
 				</form>
+				
+				<?php
+				
+				if(isset($is_owner) && $is_owner)
+				{
+				echo '<br/>';
+				echo '<br/>';
+				echo '<div>authorization</div>';
+				echo '<select id="public_select">';
+					echo '<option value="0">public</option>';
+					echo '<option value="1">private</option>';
+					echo '<option value="2">editable</option>';
+					echo '<option value="3">deletable</option>';
+				echo '</select>';
+				}
+				
+				?>
+				
+				
+				
 			</div>
 
 			<div class="col-sm-9 series-main">
@@ -162,13 +273,29 @@
 				  		echo '<div class="cap-icons">';
 					  		//echo '<input type="button" name="edit" status="done" ><span class="glyphicon glyphicon-pencil"></span></input>';
 					  		//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
-				  		
-				  			echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
-				  			
-				  			echo '<a href=';
-				  			echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
-				  			echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
-				  			
+
+						if($series["public"]=="public" || (isset($is_owner) && $is_owner))
+						{
+							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
+							echo '<a href=';
+							echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
+							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
+						}
+						else if($series["public"]=="editable")
+						{
+							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
+						}
+						else if($series["public"]=="deletable")
+						{
+							echo '<a href=';
+							echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
+							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
+						}
+						else if($series["public"]=="private")
+						{
+						}
+						
+						
 				  		echo '</div>';
 				  		echo '<img src=';
 				  		echo base_url($image["path"]);
