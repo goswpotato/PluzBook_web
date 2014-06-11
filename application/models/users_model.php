@@ -25,7 +25,7 @@ class Users_model extends CI_Model
 	}
 	
 	
-	function check_login($email, $passwod)
+	function check_login($email, $password)
 	{
 		$user_query = $this->db->query(
 			"
@@ -35,12 +35,26 @@ class Users_model extends CI_Model
 			"
 		);
 		
+		$user=array();
 		if($user_query->num_rows() > 0)
 		{
-			return $user_query->row_array();
+			// check password
+			$user=$user_query->row_array();
+			if($user["password"]==$password)
+			{
+				$user["msg"]="success";
+			}
+			else 
+			{
+				$user["msg"]="wrong password";
+			}
+		}
+		else 
+		{
+			$user["msg"]="no user";
 		}
 
-		return NULL;
+		return $user;
 	}
 	
 	function check_signup($email, $password)

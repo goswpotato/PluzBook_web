@@ -92,7 +92,11 @@
 			</div>
 			<div class="col-sm-6 col-md-5 col-md-offset-1">
 				<div class="row primary-description">
-					
+					<div class="col-xs-12">
+						<!--
+						<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, tempora ad non explicabo consequatur quae nobis sunt architecto. Harum, officia, ea repellendus a provident voluptatibus dicta tempora explicabo modi perspiciatis.</h3>
+						-->
+					</div>
 				</div>
 				<div class="row intro-btns">
 					<div class="col-xs-6 app-download">

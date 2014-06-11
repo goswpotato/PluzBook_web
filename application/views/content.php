@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PluzBook</title>
+	<title>PluzBook <?php echo iconv("big5", "UTF-8", "¨t¦C­¶­±"); ?></title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -47,7 +47,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-	      <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
 	      <ul class="dropdown-menu">
 	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >Log out</a></li>
 	      </ul>

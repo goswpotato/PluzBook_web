@@ -190,8 +190,10 @@ class Content_model extends CI_Model
 	}
 	
 	
-	function add_images($user_id, $user_email, $series_id, $image_files)
+	function add_images($user_id, $series_id, $image_files)
 	{
+		$author=$this->get_author($series_id);
+	
 		$series_query = $this->db->query(
 			"
 			SELECT name, cover_id
@@ -202,7 +204,7 @@ class Content_model extends CI_Model
 		
 		$series_name=$series_query->row_array()["name"];
 		$hash_name=md5($series_name);
-		$hash_email=md5($user_email);
+		$hash_email=md5($author["email"]);
 		$cover_id=$series_query->row_array()["cover_id"];
 		
 		$value_array=[];
@@ -241,7 +243,7 @@ class Content_model extends CI_Model
 				}
 				else
 				{
-					echo "error when move from temp directory to upload directory\n";
+					return "error when move from temp directory to upload directory\n";
 				}
 			}
 		}
@@ -273,7 +275,9 @@ class Content_model extends CI_Model
 				WHERE id={$series_id};
 				"
 			);
-		}  
+		}
+		
+		return "";
 	}
 	
 	

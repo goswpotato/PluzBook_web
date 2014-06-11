@@ -63,31 +63,35 @@ class Users_controller extends CI_Controller
 		
 		$user=$this->Users_model->check_login($email, $password);
 		
-		// still needed to be edited
-		if($user==null)
-		{
-			redirect("users_controller/show_login_page", "refresh");
-		}
-		else 
+		if($user["msg"]=="success")
 		{
 			// login successfully
-			
+				
 			/*
-			$newdata = array(
-				'id' => $user['id'],
-				'account'  => $user['account'],
-				'logged_in' => true
-			);
-			
+			 $newdata = array(
+			 		'id' => $user['id'],
+			 		'account'  => $user['account'],
+			 		'logged_in' => true
+			 );
+				
 			$this->session->set_userdata($newdata);
 			*/
-			
+				
 			$_SESSION["uid"] = $user["id"];
 			$_SESSION["email"] = $user["email"];
 			$_SESSION["logged_in"] = true;
-			
+				
 			redirect("content_controller/show_content_page", "refresh");
 		}
+		else if($user["msg"]=="wrong password") 
+		{
+			$this->load->view("login");
+		}
+		else if($user["msg"]=="no user")
+		{
+			$this->load->view("login");
+		}
+		
 	}
 	
 	function send_signup()

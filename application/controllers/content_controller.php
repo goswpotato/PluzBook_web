@@ -115,18 +115,21 @@ class Content_controller extends CI_Controller
 	{
 		// still needed to be edited
 		
-		// if use Ajax, how to post these parameter?
 		$series_id=$_POST["sid"];
 		$image_files = $_FILES["upload_images"];
 		
-		
-		if(count($image_files["name"])>0 && $this->Content_model->add_images($_SESSION["uid"], $_SESSION["email"], $series_id, $image_files)!="")
+		$msg=$this->Content_model->add_images($_SESSION["uid"], $series_id, $image_files);
+		if($msg!="")
 		{
+			echo $msg;
+			return false;
 		}
 		else
 		{
 			redirect("content_controller/show_series_page/{$series_id}", "refresh");
 		}
+		
+		return true;
 	}
 	
 	function change_description()

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PluzBook</title>
+	<title>PluzBook <?php echo iconv("big5", "UTF-8", "�Ϥ�����"); ?></title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -136,22 +136,24 @@
 		
 		var auth = "<?php echo $series["public"]; ?>";
 		
-		if(auth=="public")
+		if(auth=="公開")
 		{
 			$("#public_select").val(0);
 		}
-		else if(auth=="private")
+		else if(auth=="私人")
 		{
 			$("#public_select").val(1);
 		}
-		else if(auth=="editable")
+		else if(auth=="可編輯")
 		{
 			$("#public_select").val(2);
 		}
+		/*
 		else if(auth=="deletable")
 		{
 			$("#public_select").val(3);
 		}
+		*/
 		
 		
 		$("#public_select").change(
@@ -182,7 +184,24 @@
 			}
 		);
 		
-	});
+		
+		$("#upload_button").click(
+			function(event)
+			{
+				event.preventDefault();
+				
+				if($("#file_chooser").val()=="")
+				{
+					alert("please choose files.");
+					return false;
+				}
+				
+				return true;
+			}
+		);
+		
+		
+	}); // end of $(document).ready(function(){
 	
 	</script>
 
@@ -195,7 +214,7 @@
 
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
-	      <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
 	      <ul class="dropdown-menu">
 	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >Log out</a></li>
 	      </ul>
@@ -219,9 +238,20 @@
 				</div>
 				<form action=<?php echo site_url("content_controller/add_images"); ?> method="post" accept-charset="utf-8" enctype="multipart/form-data">
 					<input type="hidden" name="sid" value=<?php echo $series["id"]; ?> />
-					<input type="file" name="upload_images[]" size="20" accept="image/*" multiple >
+					<input type="file" name="upload_images[]" size="20" accept="image/*" multiple id="file_chooser" />
 					<br/>
-					<input type="submit" value="Upload" style="color: #aaa; background: #fff; border: #ccc 1px solid; border-radius: 3px; width: 80px; height: 40px;">
+					
+					<input type="submit" value="Upload" style="color: #aaa; background: #fff; border: #ccc 1px solid; border-radius: 3px; width: 80px; height: 40px;" id="upload_button"
+					
+				<?php
+				if(count($images)>=16 || (!$is_owner && $series["public"]!="private"))
+				{
+					echo " disabled";
+				}
+				?>
+					
+					/> <!-- end of upload button <input type="submit" value ="Upload"...... -->
+					
 				</form>
 				
 				<?php
@@ -232,10 +262,10 @@
 				echo '<br/>';
 				echo '<div>authorization</div>';
 				echo '<select id="public_select">';
-					echo '<option value="0">public</option>';
-					echo '<option value="1">private</option>';
-					echo '<option value="2">editable</option>';
-					echo '<option value="3">deletable</option>';
+					echo '<option value="0">公開</option>';
+					echo '<option value="1">私人</option>';
+					echo '<option value="2">可編輯</option>';
+					//echo '<option value="3">deletable</option>';
 				echo '</select>';
 				}
 				
