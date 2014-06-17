@@ -196,6 +196,9 @@
 					return false;
 				}
 				
+				
+				$("#upload_form").submit();
+				
 				return true;
 			}
 		);
@@ -236,7 +239,7 @@
 				<div class="caption">
 					<h4 id="series_name"><?php echo $series["name"]; ?></h4>
 				</div>
-				<form action=<?php echo site_url("content_controller/add_images"); ?> method="post" accept-charset="utf-8" enctype="multipart/form-data">
+				<form action=<?php echo site_url("content_controller/add_images"); ?> method="post" accept-charset="utf-8" enctype="multipart/form-data" id="upload_form" >
 					<input type="hidden" name="sid" value=<?php echo $series["id"]; ?> />
 					<input type="file" name="upload_images[]" size="20" accept="image/*" multiple id="file_chooser" />
 					<br/>
