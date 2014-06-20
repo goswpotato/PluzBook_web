@@ -1,0 +1,443 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+/*! normalize.css v3.0.0 | HTML5 Display Definitions | MIT License | git.io/normalize */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block;
+}
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+/*! normalize.css v3.0.0 | Base | MIT License | git.io/normalize */
+html {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/*! normalize.css v3.0.0 | Links | MIT License | git.io/normalize */
+a {
+  background: transparent;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/*! normalize.css v3.0.0 | Typography | MIT License | git.io/normalize */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+dfn {
+  font-style: italic;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/*! normalize.css v3.0.0 | Embedded Content | MIT License | git.io/normalize */
+img {
+  border: 0;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/*! normalize.css v3.0.0 | Figures | MIT License | git.io/normalize */
+figure {
+  margin: 1em 40px;
+}
+
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+pre {
+  overflow: auto;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/*! normalize.css v3.0.0 | Forms | MIT License | git.io/normalize */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+}
+
+optgroup {
+  font-weight: bold;
+}
+
+/*! normalize.css v3.0.0 | Tables | MIT License | git.io/normalize */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+* {
+  transition: 0.3s;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  font-family: 'Open Sans', 'Hiragino Kaku Gothic Pro', sans-serif;
+  padding: 50px 0 50px;
+}
+
+.navbar-default {
+  border: none;
+}
+.navbar-default .logo {
+  height: 50px;
+  float: left;
+  margin: -15px 10px 0 -15px;
+  background-color: #6dd0cd;
+}
+.navbar-default:hover .logo {
+  background-color: #0abbb5;
+}
+
+.navbar-fixed-top .container {
+  height: 50px;
+}
+
+.footer {
+  margin-bottom: 0;
+  padding-top: 15px;
+  font-weight: 300;
+  font-size: 10px;
+  color: #ccc;
+  background-color: white;
+}
+.footer a {
+  color: #ccc;
+}
+
+.intro {
+  min-height: 100%;
+  background: url(../img/grass.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+.intro .container {
+  padding: 50px 0 50px;
+}
+@media (max-width: 768px) {
+  .intro {
+    padding: 17px;
+  }
+}
+
+.phone-main {
+  width: 100%;
+  padding: 50px 25px 80px;
+  background-color: #111;
+  border: #000 2px solid;
+  border-radius: 20px;
+  box-shadow: #666 -2px -1px 0;
+}
+@media (max-width: 992px) {
+  .phone-main {
+    border-radius: 15px;
+    padding: 35px 15px 50px;
+  }
+}
+.phone-main::after {
+  content: "";
+  height: 30px;
+  width: 50px;
+  border: #666 1px solid;
+  border-radius: 5px;
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  margin-left: -25px;
+  box-shadow: 0 0 5px #555;
+}
+@media (max-width: 992px) {
+  .phone-main::after {
+    height: 20px;
+    width: 40px;
+    margin-left: -20px;
+  }
+}
+.phone-main img {
+  width: 100%;
+}
+.phone-main .phone-screen {
+  width: 100%;
+  height: auto;
+}
+.phone-main .phone-screen .carousel-indicators {
+  bottom: -180px;
+}
+@media (max-width: 992px) {
+  .phone-main .phone-screen .carousel-indicators {
+    bottom: -140px;
+  }
+}
+.phone-main .phone-slide {
+  width: 100%;
+  height: auto;
+}
+
+.primary-description {
+  color: #fff;
+  margin-top: 90%;
+  font-weight: 100;
+}
+@media (max-width: 992px) {
+  .primary-description {
+    padding: 30px 20px 0;
+  }
+}
+@media (max-width: 768px) {
+  .primary-description {
+    margin: 50px 0 0;
+  }
+}
+
+.intro-btns {
+  margin-top: 20px;
+}
+@media (max-width: 992px) {
+  .intro-btns {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+.intro-btns img {
+  width: 100%;
+}
+
+.user-form a {
+  color: #fff;
+  margin: 0 3px 10px;
+  text-shadow: 0 0 5px #333;
+  font-weight: 300;
+}
+.user-form .form-text {
+  color: #fff;
+  text-shadow: 0 0 5px #333;
+  font-weight: 300;
+}
+.user-form input[type="text"],
+.user-form input[type="password"] {
+  font-size: 14px;
+  height: auto;
+  padding: 10px;
+  border-radius: 5px;
+  border: #ccc 1px solid;
+  width: 100%;
+}
+.user-form .input-block-level.input-top {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.user-form .input-block-level.input-btm {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.user-form .btn {
+  color: #fff;
+  background-color: #333;
+}
+
+.caption a {
+  color: #333;
+}
+.caption h4 {
+  margin-top: 20px;
+}
+
+.upload .caption {
+  margin-top: -5px;
+}
+.upload input[type="text"] {
+  border: none;
+  max-width: 100%;
+  height: 24px;
+}
+.upload input[type="submit"] {
+  border: none;
+  background-color: #e9edf0;
+  width: 100%;
+}
+
+.series-main {
+  margin-top: 20px;
+}
+.series-main .thumbnail {
+  border: none;
+}
+.series-main p {
+  margin-top: 10px;
+}
+
+.cap-icons {
+  float: right;
+  z-index: 1;
+}
+.cap-icons a {
+  color: #ccc;
+}

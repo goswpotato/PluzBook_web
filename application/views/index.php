@@ -16,11 +16,7 @@
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/untitled.css");?>>
-	<!--
-	<link rel="stylesheet" href="./css/untitled.css">
-	-->
-	
+	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/screen.css");?>>
 	<link rel="shortcut icon" href=<?php echo base_url("public_asset/favicon.ico");?>> 
 
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -30,7 +26,11 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    <a class="navbar-brand" href=<?php echo site_url(""); ?> >PluzBook</a>
+
+    <a class="navbar-brand" href=<?php echo site_url(""); ?> >
+    	<img src=<?php echo base_url("public_asset/img/logo_nav.png"); ?> class="logo">
+    	PluzBook
+    </a>
 
     <ul class="nav navbar-nav navbar-right">
       <?php
@@ -56,8 +56,9 @@
 <div class="intro">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-sm-6 col-md-4">
 				<div class="phone-main">
+					<img src=<?php echo base_url("public_asset/img/screen_top.png"); ?> >
 					<div class="phone-screen">
 						<div id="carousel-example-generic" class="carousel slide phone-slide" data-ride="carousel">
 
@@ -88,14 +89,13 @@
 						  </div>
 						</div>
 					</div>
+					<img src=<?php echo base_url("public_asset/img/screen_bottom.png"); ?> >
 				</div>
 			</div>
-			<div class="col-sm-6 col-md-5 col-md-offset-1">
+			<div class="col-sm-6 col-md-6 col-md-offset-1">
 				<div class="row primary-description">
 					<div class="col-xs-12">
-						<!--
-						<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, tempora ad non explicabo consequatur quae nobis sunt architecto. Harum, officia, ea repellendus a provident voluptatibus dicta tempora explicabo modi perspiciatis.</h3>
-						-->
+						<p>臣亮言：先帝創業未半，而中道崩殂。今天下三分，益州疲弊，此誠危急存亡之秋也。</p>
 					</div>
 				</div>
 				<div class="row intro-btns">

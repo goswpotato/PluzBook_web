@@ -7,11 +7,7 @@
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/untitled.css");?>>
-	<!--
-	<link rel="stylesheet" href="./css/untitled.css">
-	-->
-
+	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/screen.css");?>>
 	<link rel="shortcut icon" href=<?php echo base_url("public_asset/favicon.ico");?>>
 
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
