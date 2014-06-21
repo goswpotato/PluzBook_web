@@ -43,20 +43,24 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    <a class="navbar-brand" href=<?php echo site_url(""); ?> >PluzBook</a>
+    <a class="navbar-brand" href=<?php echo site_url(""); ?> >
+    	<img src=<?php echo base_url("public_asset/img/logo_nav.png"); ?> class="logo">
+    	PluzBook
+    </a>
   </div>
 </nav>
 
 <div class="intro">
 	<div class="container">
 		<div class="row">
-			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
+			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 			  <form class="user-form" action=<?php echo site_url("users_controller/send_signup"); ?> method="post" name="process" id="sign_form">
+			  	<h6>Sign up</h6>
 			    <input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email" size="25" autofocus="">
-			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="Password" size="25">
+			    <input type="password" name="password" id="password" class="input-block-level" placeholder="Password" size="25">
 			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="Password Again" size="25">
 
-				<button class="btn pull-right" type="button" onclick="check_signup()" >Sign up</button>
+				<button class="btn btn-block" type="button" onclick="check_signup()" >Create Account</button>
 			  </form>	
 			</div>
 		</div>
