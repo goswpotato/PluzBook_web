@@ -38,14 +38,14 @@
       {
       	echo '<li><a href=';
       	echo site_url("users_controller/send_logout");
-      	echo '>Log out</a></li>';
+      	echo '>登出</a></li>';
       
       }
       else 
       {
       	echo '<li><a href=';
       	echo site_url("users_controller/show_login_page");
-      	echo '>Log in</a></li>';
+      	echo '>登入</a></li>';
       }
       ?>
       
@@ -93,9 +93,8 @@
 			<div class="col-sm-6 col-md-5 col-md-offset-1">
 				<div class="row primary-description">
 					<div class="col-xs-12">
-						<!--
-						<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, tempora ad non explicabo consequatur quae nobis sunt architecto. Harum, officia, ea repellendus a provident voluptatibus dicta tempora explicabo modi perspiciatis.</h3>
-						-->
+						<h1>隆重介紹 PluzBook</h1>
+						<p>與朋友談天從來沒有這麼愉快過！豐富的貼圖、易於使用的界面，PluzBook 是你社交生活中不可或缺的常備 APP！</p>
 					</div>
 				</div>
 				<div class="row intro-btns">
