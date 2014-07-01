@@ -38,14 +38,14 @@
       {
       	echo '<li><a href=';
       	echo site_url("users_controller/send_logout");
-      	echo '>Log out</a></li>';
+      	echo '>登出</a></li>';
       
       }
       else 
       {
       	echo '<li><a href=';
       	echo site_url("users_controller/show_login_page");
-      	echo '>Log in</a></li>';
+      	echo '>登入</a></li>';
       }
       ?>
       
@@ -93,9 +93,8 @@
 			<div class="col-sm-6 col-md-5 col-md-offset-1">
 				<div class="row primary-description">
 					<div class="col-xs-12">
-						<!--
-						<h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium, tempora ad non explicabo consequatur quae nobis sunt architecto. Harum, officia, ea repellendus a provident voluptatibus dicta tempora explicabo modi perspiciatis.</h3>
-						-->
+						<h1>PluzBook，橫空出世！</h1>
+						<p>宇宙最便利的貼圖軟體，終於姍姍來遲了！可愛的貓咪、逗趣的插畫、甚至詼諧的八點檔，現在都將成為你貼圖聊天的囊中物。線上註冊帳號還能上傳自訂貼圖，你還在等什麼？</p>
 					</div>
 				</div>
 				<div class="row intro-btns">
