@@ -37,7 +37,7 @@
 			return true;
 		}
 
-		alert("the password doesn't match");
+		alert("密碼與確認密碼不一致，請重新輸入一次噢");
 		return false;
 	}
 		
@@ -56,11 +56,11 @@
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
 			  <form class="user-form" action=<?php echo site_url("users_controller/send_signup"); ?> method="post" name="process" id="sign_form">
-			    <input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email" size="25" autofocus="">
-			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="Password" size="25">
-			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="Password Again" size="25">
+			    <input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email 信箱" size="25" autofocus="">
+			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="密碼" size="25">
+			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="重新輸入密碼" size="25">
 
-				<button class="btn pull-right" type="button" onclick="check_signup()" >Sign up</button>
+				<button class="btn pull-right" type="button" onclick="check_signup()" >註冊！</button>
 			  </form>	
 			</div>
 		</div>
