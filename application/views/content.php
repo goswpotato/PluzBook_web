@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PluzBook <?php echo iconv("big5", "UTF-8", "�t�C����"); ?></title>
+	<title>PluzBook - 系列列表</title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -49,7 +49,7 @@
       <li class="dropdown">
 	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
 	      <ul class="dropdown-menu">
-	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >Log out</a></li>
+	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >登出</a></li>
 	      </ul>
 	    </li>
     </ul>
@@ -57,6 +57,7 @@
 </nav>
 
 <div class="intro">
+	<h3>我的貼圖系列</h3>
 	<div class="container">
 		<?php
 		
@@ -193,6 +194,7 @@
 	</div>
 	
 	<!-- others' series -->
+	<h3>其他人的貼圖系列</h3>
 	<div class="container">
 	<?php	
 		$i=0;

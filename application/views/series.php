@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PluzBook <?php echo iconv("big5", "UTF-8", "�Ϥ�����"); ?></title>
+	<title>PluzBook - 貼圖系列</title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -136,15 +136,15 @@
 		
 		var auth = "<?php echo $series["public"]; ?>";
 		
-		if(auth=="公開")
+		if(auth=="任何人")
 		{
 			$("#public_select").val(0);
 		}
-		else if(auth=="私人")
+		else if(auth=="只有我")
 		{
 			$("#public_select").val(1);
 		}
-		else if(auth=="可編輯")
+		else if(auth=="允許其他人投稿")
 		{
 			$("#public_select").val(2);
 		}
@@ -219,7 +219,7 @@
       <li class="dropdown">
 	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
 	      <ul class="dropdown-menu">
-	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >Log out</a></li>
+	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >登出</a></li>
 	      </ul>
 	    </li>
     </ul>
@@ -263,11 +263,11 @@
 				{
 				echo '<br/>';
 				echo '<br/>';
-				echo '<div>authorization</div>';
+				echo '<div>誰能修改這個系列？</div>';
 				echo '<select id="public_select">';
-					echo '<option value="0">公開</option>';
-					echo '<option value="1">私人</option>';
-					echo '<option value="2">可編輯</option>';
+					echo '<option value="0">任何人</option>';
+					echo '<option value="1">只有我</option>';
+					echo '<option value="2">允許其他人投稿</option>';
 					//echo '<option value="3">deletable</option>';
 				echo '</select>';
 				}
