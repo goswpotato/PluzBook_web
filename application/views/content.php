@@ -272,7 +272,7 @@
 
 <nav class="navbar navbar-default footer" role="navigation">
   <div class="container text-center">
-  	<p>(c) 2014 PluzLab - <a href="#">Privacy</a> - <a href="#">Term</a></p>
+  	<p>(c) 2014 PluzLab - <a href="#">Privacy</a> - <a href="<?php echo site_url("users_controller/show_term_page"); ?>" >Term</a></p>
   </div>
 </nav>
 	

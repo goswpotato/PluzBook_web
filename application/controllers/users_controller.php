@@ -140,6 +140,13 @@ class Users_controller extends CI_Controller
 		// still needed to be edited
 		redirect("users_controller/show_login_page");
 	}
+	
+	
+	function show_term_page()
+	{
+		$this->load->view("term");
+	}
+	
 }
 
 ?>
