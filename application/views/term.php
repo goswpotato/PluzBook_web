@@ -26,7 +26,7 @@
 
 <div class="intro">
 	
-	<!-- start here -->
+	<!-- add terms of service here -->
 	
 	
 </div>
