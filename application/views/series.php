@@ -7,8 +7,7 @@
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/untitled.css");?>>
-
+	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/screen.css");?>>
 	<link rel="shortcut icon" href=<?php echo base_url("public_asset/favicon.ico");?>>
 
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -16,17 +15,33 @@
 	<script src=<?php echo base_url("public_asset/js/series.js"); ?>></script>
 
 	<script>
-	$(document).ready(function(){
-		$imgHeight = $(".thumbnail img").height();
-		$(".upload input[type='submit']").height($imgHeight-5);
 
-		$(window).resize(function() {
-		  $imgHeight = $(".thumbnail img").height();
-			$(".upload input[type='submit']").height($imgHeight-5);
+	function imgResize() {
+		$wrapperWidth = $(".wrapper").width();
+		$(".wrapper").height($wrapperWidth);
+
+		$(".wrapper img").each(function() {
+
+			$img = $(this);
+
+	  	if ($img.width() >= $img.height()) {  		
+	  		$img.height($wrapperWidth);
+	  		$img.css('left', ($img.width()-$wrapperWidth)/2*(-1));
+	  	}
+	  	else {
+	  		$img.width($wrapperWidth);
+	  		$img.css('top', ($img.height()-$wrapperWidth)/2*(-1));
+	  	}
 		});
+	}
 
+	$(document).ready(imgResize);
+	$(window).resize(imgResize);
+
+	$(document).ready(function(){
 
 		$("a[name='edit']").click(
+
 			function(event)
 			{
 				var thumbnail_object;
@@ -38,6 +53,7 @@
 				
 				if($(this).attr("status")=="done")
 				{
+					$(this).css('color', '#6DD0CD');
 					p_object=thumbnail_object.children("p");
 					p_object.replaceWith("<textarea rows='3' placeholder='' ></textarea>");
 					
@@ -53,6 +69,7 @@
 				}
 				else if($(this).attr("status")=="editing")
 				{
+					$(this).css('color', '#ccc');
 					textarea_object=thumbnail_object.children("textarea");
 					textarea_object.replaceWith("<p>" + textarea_object.val() + "</p>");
 	
@@ -87,7 +104,6 @@
 			}
 		);
 
-		
 		$("a[name='remove']").click(remove_event);
 		
 		<?php
@@ -203,7 +219,6 @@
 			}
 		);
 		
-		
 	}); // end of $(document).ready(function(){
 	
 	</script>
@@ -213,8 +228,12 @@
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    <a class="navbar-brand" href=<?php echo site_url(""); ?> >PluzBook</a>
 
+  	<a class="navbar-brand" href=<?php echo site_url(""); ?> >
+    	<img src=<?php echo base_url("public_asset/img/logo_nav.png"); ?> class="logo">
+    	PluzBook
+    </a>
+    
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
 	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
@@ -231,9 +250,8 @@
 	<input type="hidden" id="sid" value="<?php echo $series["id"]; ?>" >
 	<input type="hidden" id="description_url" value="<?php echo site_url("content_controller/change_description"); ?>" >
 	
-
-	<div class="container">
-		<div class="row thumbnail">
+	<div class="container content-container">
+		<div class="row">
 
 			<div class="col-sm-3">
 				<div class="caption">
@@ -253,7 +271,7 @@
 				}
 				?>
 					
-					/> <!-- end of upload button <input type="submit" value ="Upload"...... -->
+					/>
 					
 				</form>
 				
@@ -273,9 +291,6 @@
 				}
 				
 				?>
-				
-				
-				
 			</div>
 
 			<div class="col-sm-9 series-main">
@@ -283,33 +298,31 @@
 			  
 			  if(isset($images) && isset($series))
 			  {
-			  	// images don't need <row>
-			  	
-			  	foreach ($images as $image)
+			  	echo '<div class="row">';
+			  	foreach ($images as $key=>$image)
 			  	{
-			echo '<div class="col-md-3 col-sm-4 col-xs-6">';
-			
-				echo '<form action=';
-				echo site_url("content_controller/image_operation");
-				echo ' method="post" >';
+						echo '<div class="col-md-3 col-xs-6">';
+						
+						echo '<form action=';
+						echo site_url("content_controller/image_operation");
+						echo ' method="post" >';
 				
-					echo '<input type="hidden" name="iid" value=';
-					echo $image["id"];
-					echo '>';
-					
-					echo '<input type="hidden" name="description_url" value=';
-					echo site_url("content_controller/change_description");
-					echo '>';
-					
+						echo '<input type="hidden" name="iid" value=';
+						echo $image["id"];
+						echo '>';
+						
+						echo '<input type="hidden" name="description_url" value=';
+						echo site_url("content_controller/change_description");
+						echo '>';	
 			
 				  	echo '<div class="thumbnail">';
-				  		echo '<div class="cap-icons">';
-					  		//echo '<input type="button" name="edit" status="done" ><span class="glyphicon glyphicon-pencil"></span></input>';
-					  		//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
+			  		echo '<div class="cap-icons">';
+			  		//echo '<input type="button" name="edit" status="done" ><span class="glyphicon glyphicon-pencil"></span></input>';
+			  		//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
 
 						if($series["public"]=="public" || (isset($is_owner) && $is_owner))
 						{
-							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
+							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a> ';
 							echo '<a href=';
 							echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
 							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
@@ -328,21 +341,23 @@
 						{
 						}
 						
-						
-				  		echo '</div>';
-				  		echo '<img src=';
-				  		echo base_url($image["path"]);
-						echo ' >';
-				  		echo '<p>';
-				  		echo $image["description"];
+			  		echo '</div>';
+			  		echo '<div class="wrapper"><img src=';
+			  		echo base_url($image["path"]);
+						echo ' ></div>';
+			  		echo '<p>';
+			  		echo $image["description"];
 						echo '</p>';
 				  	echo '</div>';
 			  	
-			  	
-			  	echo '</form>';
-			  	
-			echo '</div>';
+			  		echo '</form>';			  	
+						echo '</div>';
+
+						if ($key%4 == 3) {
+			  			echo '</div><div class="row">';
+			  		}
 			  	}
+			  	echo '</div>'; //end of row
 			  }
 			  
 			  ?>
