@@ -456,3 +456,37 @@ body {
 .series-main p {
   margin-top: 10px;
 }
+
+#file_chooser {
+  z-index: 999;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+#file_chosen {
+  background: #EFEFEF;
+}
+#file_chosen p {
+  padding: 10px;
+  color: #333;
+  font-size: 12px;
+  text-align: center;
+}
+
+.file-btn {
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  color: #6dd0cd;
+  background: #FFF;
+  font-weight: normal;
+}
+
+input.disabled {
+  background: #EEE !important;
+}

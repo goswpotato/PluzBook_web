@@ -16,7 +16,7 @@
 
 	<script>
 
-	function imgResize() {
+	function imgClip() {
 		$wrapperWidth = $(".wrapper").width();
 		$(".wrapper").height($wrapperWidth);
 
@@ -35,10 +35,12 @@
 		});
 	}
 
-	$(document).ready(imgResize);
-	$(window).resize(imgResize);
+	$(document).ready(imgClip);
+	$(window).resize(imgClip);
 
 	$(document).ready(function(){
+
+		imgClip;
 
 		$("a[name='edit']").click(
 
@@ -219,6 +221,15 @@
 			}
 		);
 		
+		$('#file_chooser').change(function(){
+			$fileList = $(this)[0].files;
+			$('#file_chosen p').empty();
+
+			for ($i = 0; $i < $fileList.length; $i++ ) {
+				$('#file_chosen p').append($fileList[$i].name + '<br/>');
+			}
+		});
+		
 	}); // end of $(document).ready(function(){
 	
 	</script>
@@ -257,21 +268,25 @@
 				<div class="caption">
 					<h4 id="series_name"><?php echo $series["name"]; ?></h4>
 				</div>
+
+				<br/>
 				<form action=<?php echo site_url("content_controller/add_images"); ?> method="post" accept-charset="utf-8" enctype="multipart/form-data" id="upload_form" >
 					<input type="hidden" name="sid" value=<?php echo $series["id"]; ?> />
-					<input type="file" name="upload_images[]" size="20" accept="image/*" multiple id="file_chooser" />
-					<br/>
+					<div id="file_chosen">
+						<label class="file-btn">選擇檔案<input type="file" name="upload_images[]" size="20" accept="image/*" multiple id="file_chooser" /></label>
+						<p></p>
 					
-					<input type="submit" value="Upload" style="color: #aaa; background: #fff; border: #ccc 1px solid; border-radius: 3px; width: 80px; height: 40px;" id="upload_button"
+						<input type="submit" value="上傳" style="color: #FFF; background: #6DD0CD; border: none; width: 100%; height: 40px;" id="upload_button"
 					
-				<?php
-				if(count($images)>=16 || (!$is_owner && $series["public"]!="private"))
-				{
-					echo " disabled";
-				}
-				?>
+						<?php
+						if(count($images)>=16 || (!$is_owner && $series["public"]!="private"))
+						{
+							echo 'class="disabled" disabled';
+						}
+						?>
 					
-					/>
+						/>
+					</div>
 					
 				</form>
 				
@@ -279,15 +294,14 @@
 				
 				if(isset($is_owner) && $is_owner)
 				{
-				echo '<br/>';
-				echo '<br/>';
-				echo '<div>誰能修改這個系列？</div>';
-				echo '<select id="public_select">';
-					echo '<option value="0">任何人</option>';
-					echo '<option value="1">只有我</option>';
-					echo '<option value="2">允許其他人投稿</option>';
-					//echo '<option value="3">deletable</option>';
-				echo '</select>';
+					echo '<br/>';
+					echo '<div><p>誰能修改這個系列？</p></div>';
+					echo '<select id="public_select">';
+						echo '<option value="0">任何人</option>';
+						echo '<option value="1">只有我</option>';
+						echo '<option value="2">允許其他人投稿</option>';
+						//echo '<option value="3">deletable</option>';
+					echo '</select>';
 				}
 				
 				?>
