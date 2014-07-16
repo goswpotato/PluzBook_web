@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PluzBook <?php echo iconv("big5", "UTF-8", "登入頁面"); ?></title>
+	<title>PluzBook <?php echo iconv("big5", "UTF-8", "認證"); ?></title>
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -28,17 +28,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-8 col-xs-offset-2 col-md-4 col-md-offset-4">
-			  <form class="user-form" action=<?php echo site_url("users_controller/send_login"); ?> method="post" name="process">
-			  	
-					<span class="form-text pull-right"><input type="checkbox"> Remember me</span>
-					<h6>Log in</h6>
-			    <input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email" size="25" autofocus="">
-			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="Password" size="25">
-
-			    <button class="btn btn-block" type="submit">Log in</button>
-				<p><a href=<?php echo site_url("users_controller/show_signup_page"); ?> class="pull-left clearfix">Create a new account</a><!-- <a href="" class="pull-right clearfix">Forget password</a> --></p>
-				<p><a href=<?php echo site_url("users_controller/show_forget_page"); ?> class="pull-left clearfix">Forget Password</a><!-- <a href="" class="pull-right clearfix">Forget password</a> --></p>
-			  </form>	
+				Your account has been validated, please go back to login page and login again.
 			</div>
 		</div>
 	</div>

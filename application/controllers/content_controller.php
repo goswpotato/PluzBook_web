@@ -23,7 +23,7 @@ class Content_controller extends CI_Controller
 		// check whether logged user, put here then all request will be checked???
 		if(!$this->is_login())
 		{
-			redirect("users_controller/show_login_page", "refresh");
+			redirect("users_controller/show_login_page", "location");
 		}
 	}
 	
@@ -70,7 +70,7 @@ class Content_controller extends CI_Controller
 		{
 		}
 		
-		redirect("content_controller/show_content_page", "refresh");
+		redirect("content_controller/show_content_page", "location");
 	}
 	
 	
@@ -108,7 +108,7 @@ class Content_controller extends CI_Controller
 		{
 		}
 		
-		redirect("content_controller/show_content_page", "refresh");
+		redirect("content_controller/show_content_page", "location");
 	}
 	
 	function add_images()
@@ -126,7 +126,7 @@ class Content_controller extends CI_Controller
 		}
 		else
 		{
-			redirect("content_controller/show_series_page/{$series_id}", "refresh");
+			redirect("content_controller/show_series_page/{$series_id}", "location");
 		}
 		
 		return true;
@@ -142,7 +142,7 @@ class Content_controller extends CI_Controller
 		
 		echo $description;
 		
-		//redirect("content_controller/show_series_page/{$series_id}", "refresh");
+		//redirect("content_controller/show_series_page/{$series_id}", "location");
 	}
 	
 	function delete_image($series_id, $image_id)
@@ -158,7 +158,7 @@ class Content_controller extends CI_Controller
 		
 		$this->Content_model->delete_images($series_id, $image_ids);
 		
-		redirect("content_controller/show_series_page/{$series_id}", "refresh");
+		redirect("content_controller/show_series_page/{$series_id}", "location");
 	}
 	
 	function change_series_name()

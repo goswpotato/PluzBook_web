@@ -249,6 +249,7 @@
       <li class="dropdown">
 	      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION["email"]; ?><b class="caret"></b></a>
 	      <ul class="dropdown-menu">
+			<li><a href=<?php echo site_url("users_controller/show_change_page"); ?> >更改密碼</a></li>
 	        <li><a href=<?php echo site_url("users_controller/send_logout"); ?> >登出</a></li>
 	      </ul>
 	    </li>
