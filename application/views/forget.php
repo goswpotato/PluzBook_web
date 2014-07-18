@@ -23,19 +23,6 @@
 			$(".upload input[type='submit']").height($imgHeight-5);
 		});
 	});
-
-	function check_signup(object)
-	{
-		if(document.getElementById("password").value==document.getElementById("re_password").value)
-		{
-			document.getElementById("sign_form").submit();
-
-			return true;
-		}
-
-		alert("密碼與確認密碼不一致，請重新輸入一次噢");
-		return false;
-	}
 		
 	</script>
 </head>
@@ -58,7 +45,7 @@
 			  	<h6>Change Password</h6>
 				<input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email 信箱" size="25" autofocus="">
 
-				<button class="btn pull-right" type="button" onclick="check_signup()" >重設密碼！</button>
+				<button class="btn pull-right" type="submit" >重設密碼！</button>
 			  </form>	
 			</div>
 		</div>

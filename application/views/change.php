@@ -60,7 +60,7 @@
 			    <input type="password" name="new_password" id="password" class="input-block-level input-btm" placeholder="新密碼" size="25">
 			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="重新輸入新密碼" size="25">
 
-				<button class="btn pull-right" type="button" onclick="check_signup()" >更改！</button>
+				<button class="btn pull-right" type="submit" >更改！</button>
 			  </form>	
 			</div>
 		</div>

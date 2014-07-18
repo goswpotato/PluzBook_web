@@ -165,9 +165,11 @@ class Users_controller extends CI_Controller
 		
 		$msg=$this->Users_model->change_password($user_id, $old_password, $new_password);
 		
+		echo $msg;
+		
 		if($msg=="success")
 		{
-			redirect("users_controller/show_login_page", "location");
+			redirect("content_controller/show_content_page", "location");
 		}
 		else if($msg=="wrong password") 
 		{
@@ -210,9 +212,9 @@ class Users_controller extends CI_Controller
 	}
 	
 	
-	function show_validate_page($user_email)
+	function show_validate_page($user_id)
 	{
-		$data["user_email"]=$user_email;
+		$data["user_id"]=$user_id;
 		$this->load->view("validate", $data);
 	}
 	
@@ -239,7 +241,8 @@ class Users_controller extends CI_Controller
 			$rand_code=$msg;
 		}
 		
-		$validation_link=site_url("users_controller/account_validation/{$rand_code}/{$user_email}");
+		$user=$this->Users_model->get_single_user($user_email);
+		$validation_link=site_url("users_controller/account_validation/{$rand_code}/{$user["id"]}");
 	
 		$subject = "Email validation for PluzBook";
 		$message = "Please use this link to activate your account : \n" . $validation_link;
@@ -247,12 +250,12 @@ class Users_controller extends CI_Controller
 
 		mail($user_email, $subject, $message, $headers);
 		
-		redirect("users_controller/show_validate_page/{$user_email}", "location");
+		redirect("users_controller/show_validate_page/{$user["id"]}", "location");
 	}
 	
-	function account_validation($code, $email)
+	function account_validation($code, $id)
 	{
-		$msg=$this->Users_model->account_validation($code, $email);
+		$msg=$this->Users_model->account_validation($code, $id);
 		
 		if($msg=="")
 		{

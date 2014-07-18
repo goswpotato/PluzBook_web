@@ -90,7 +90,7 @@ class Users_model extends CI_Model
 		}
 		
 		$code_length=10;
-		$rand_code=substr(md5($rand_code, 0, code_length));
+		$rand_code=substr(md5($rand_code), 0, $code_length);
 		
 		$hash_password=md5($password);
 		$user_query = $this->db->query(
@@ -144,6 +144,8 @@ class Users_model extends CI_Model
 		{
 			$msg="wrong password";
 		}
+		
+		return $msg;
 	}
 	
 	function reset_password($user_email, $rand_password)
@@ -153,7 +155,7 @@ class Users_model extends CI_Model
 			"
 			SELECT *
 			FROM users
-			WHERE email={$user_email};
+			WHERE email='{$user_email}';
 			"
 		);
 		
@@ -171,21 +173,21 @@ class Users_model extends CI_Model
 			"
 			UPDATE users
 			SET password='{$hash_password}'
-			WHERE email={$user_email};
+			WHERE email='{$user_email}';
 			"
 		);
 		
 		return "";
 	}
 	
-	function account_validation($code, $email)
+	function account_validation($code, $user_id)
 	{
 		$user=[];
 		$user_query = $this->db->query(
 			"
 			SELECT *
 			FROM users
-			WHERE email={$email};
+			WHERE id={$user_id};
 			"
 		);
 		
@@ -204,7 +206,7 @@ class Users_model extends CI_Model
 				"
 				UPDATE users
 				SET code=''
-				WHERE email={$email};
+				WHERE id={$user_id};
 				"
 			);
 		}
@@ -218,11 +220,12 @@ class Users_model extends CI_Model
 	
 	function get_validation_code($user_email)
 	{
+		$user=[];
 		$user_query = $this->db->query(
 			"
 			SELECT *
 			FROM users
-			WHERE email={$user_email};
+			WHERE email='{$user_email}';
 			"
 		);
 		
@@ -236,8 +239,22 @@ class Users_model extends CI_Model
 			return "this account doesn't exist";
 		}
 		
-		return user["code"];
+		return $user["code"];
 	}
+	
+	function get_single_user($user_email)
+	{
+		$user = $this->db->query(
+			"
+			SELECT *
+			FROM users
+			WHERE email='{$user_email}';
+			"
+		)->row_array();
+		
+		return $user;
+	}
+	
 	
 	
 }

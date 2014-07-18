@@ -32,10 +32,10 @@
 				<br />
 				
 				<?php
-					if(isset($user_email))
+					if(isset($user_id))
 					{
 				?>
-				If you didn't recevie the mail, please click <a href=<?php echo site_url("users_controller/send_validation_email/{$user_email}"); ?> >here</a>.
+				If you didn't recevie the mail, please click <a href=<?php echo site_url("users_controller/send_validation_email/{$user_id}"); ?> >here</a>.
 				<?php
 					}
 				?>
