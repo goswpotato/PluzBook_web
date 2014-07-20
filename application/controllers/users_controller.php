@@ -206,9 +206,10 @@ class Users_controller extends CI_Controller
 
 		$subject = "Forget password in PluzBook";
 		$message = "Please use this new password : " . $rand_password . " to login, and remember to change it to your own password.\n";
-		$headers = "From: no-reply@pluzlab.com"  . "\r\n" . "X-Mailer: PHP/" . phpversion();
+		$headers = "From: no-reply@pluzbook.pluzlab.com"  . "\r\n" . "X-Mailer: PHP/" . phpversion();
 
 		mail($user_email, $subject, $message, $headers);
+		redirect("users_controller/show_login_page", "location");
 	}
 	
 	
@@ -246,7 +247,7 @@ class Users_controller extends CI_Controller
 	
 		$subject = "Email validation for PluzBook";
 		$message = "Please use this link to activate your account : \n" . $validation_link;
-		$headers = "From: no-reply@pluzlab.com"  . "\r\n" . "X-Mailer: PHP/" . phpversion();
+		$headers = "From: no-reply@pluzbook.pluzlab.com"  . "\r\n" . "X-Mailer: PHP/" . phpversion();
 
 		mail($user_email, $subject, $message, $headers);
 		
@@ -259,6 +260,7 @@ class Users_controller extends CI_Controller
 		
 		if($msg=="")
 		{
+			redirect("users_controller/show_login_page", "location");
 		}
 		else
 		{
