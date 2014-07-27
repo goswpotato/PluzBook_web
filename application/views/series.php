@@ -208,12 +208,19 @@
 			{
 				event.preventDefault();
 				
-				if($("#file_chooser").val()=="")
+				var imageFiles = document.getElementById("file_chooser");
+				filesLength = imageFiles.files.length;
+				
+				if(filesLength==0)
 				{
 					alert("please choose files.");
 					return false;
 				}
-				
+				else if(<?php echo count($images); ?> + filesLength > 16)
+				{
+					alert("the number of images in one series can't be more than 16!!");
+					return false;
+				}
 				
 				$("#upload_form").submit();
 				
