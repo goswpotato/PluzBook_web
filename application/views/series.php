@@ -296,6 +296,7 @@
 						echo '<option value="2">允許其他人投稿</option>';
 						//echo '<option value="3">deletable</option>';
 					echo '</select>';
+					echo '<p></p>';
 				}
 				
 				?>

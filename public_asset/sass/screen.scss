@@ -141,7 +141,7 @@ body {
 
 .primary-description {
 	color: #fff;
-	margin-top: 80%;
+	margin-top: 70%;
 	font-weight: 100;
 
 	@media (max-width: $break-md) {
@@ -244,12 +244,22 @@ body {
 		border: none;
 
 		.cap-icons {
-			float: right;
+			display: block;
+			text-align: right;
+			position: relative;
 			z-index: 1;
-			margin-bottom: 5px;
+			height: 70px;
+			line-height: 35px;
+			margin-bottom: -70px;
+			padding-right: 10px;
+			background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0));
 			a {
-				color: #ccc;
+				color: #fff;
 			}
+		}
+
+		a {
+			color: $logo-light;
 		}
 
 		.wrapper {
