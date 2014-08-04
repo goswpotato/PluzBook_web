@@ -36,8 +36,10 @@
 			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="Password" size="25">
 
 			    <button class="btn btn-block" type="submit">Log in</button>
-				<p><a href=<?php echo site_url("users_controller/show_signup_page"); ?> class="pull-left clearfix">Create a new account</a><!-- <a href="" class="pull-right clearfix">Forget password</a> --></p>
-				<p><a href=<?php echo site_url("users_controller/show_forget_page"); ?> class="pull-left clearfix">Forget Password</a><!-- <a href="" class="pull-right clearfix">Forget password</a> --></p>
+				<p>
+					<a href=<?php echo site_url("users_controller/show_signup_page"); ?> class="pull-left clearfix">Create a new account</a>
+					<a href=<?php echo site_url("users_controller/show_forget_page"); ?> class="pull-right clearfix">Forget Password</a>
+				</p>
 			  </form>	
 			</div>
 		</div>

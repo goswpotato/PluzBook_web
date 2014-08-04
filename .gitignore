@@ -9,3 +9,5 @@ application/logs/*
 !application/logs/.htaccess
 
 public_asset/.sass-cache/*
+
+images/*
