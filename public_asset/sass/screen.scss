@@ -253,12 +253,11 @@ body {
 		}
 
 		.wrapper {
-			clear: right;
-			overflow: hidden;
-			position: relative;
-			img {
-				position: absolute;
-			}
+	    overflow: hidden;
+	    position: relative;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+	    background-position: center;
 		}
 
 		textarea {

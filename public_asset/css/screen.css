@@ -441,12 +441,11 @@ body {
   color: #ccc;
 }
 .series-main .thumbnail .wrapper {
-  clear: right;
   overflow: hidden;
   position: relative;
-}
-.series-main .thumbnail .wrapper img {
-  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .series-main .thumbnail textarea {
   width: 100%;

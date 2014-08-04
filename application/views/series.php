@@ -16,31 +16,17 @@
 
 	<script>
 
-	function imgClip() {
+	function wrapperResize() {
 		$wrapperWidth = $(".wrapper").width();
 		$(".wrapper").height($wrapperWidth);
-
-		$(".wrapper img").each(function() {
-
-			$img = $(this);
-
-	  	if ($img.width() >= $img.height()) {  		
-	  		$img.height($wrapperWidth);
-	  		$img.css('left', ($img.width()-$wrapperWidth)/2*(-1));
-	  	}
-	  	else {
-	  		$img.width($wrapperWidth);
-	  		$img.css('top', ($img.height()-$wrapperWidth)/2*(-1));
-	  	}
-		});
 	}
 
-	$(document).ready(imgClip);
-	$(window).resize(imgClip);
+	$(window).load(wrapperResize);
+	$(window).resize(wrapperResize);
 
 	$(document).ready(function(){
 
-		imgClip;
+		wrapperResize;
 
 		$("a[name='edit']").click(
 
@@ -364,9 +350,9 @@
 						}
 						
 			  		echo '</div>';
-			  		echo '<div class="wrapper"><img src=';
-			  		echo base_url($image["path"]);
-						echo ' ></div>';
+						echo '<div class="wrapper" style="background-image: url(';
+						echo base_url($image["path"]);
+						echo ');"></div>';
 			  		echo '<p>';
 			  		echo $image["description"];
 						echo '</p>';
