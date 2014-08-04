@@ -25,10 +25,25 @@
 </nav>
 
 <div class="intro">
-	
-	<!-- add terms of service here -->
-	
-	
+	<div class="container content-container">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<img src=<?php echo base_url("public_asset/img/dummy_img.png"); ?> width="300">
+				<!-- pic/illustration for term page -->
+
+				<h3>Lorem ipsum dolor sit amet.</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima est rem dolore? Velit consequatur iusto quos, doloribus vitae et tempora nam, sequi, pariatur sed voluptas placeat reprehenderit ab corporis veniam mollitia reiciendis ipsum ea architecto dicta eaque. Quam cumque beatae magni nostrum, accusantium placeat dolor, repudiandae eveniet est ducimus rerum!</p>
+
+				<ul>
+					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+					<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
 </div>
 
 <nav class="navbar navbar-default footer" role="navigation">
