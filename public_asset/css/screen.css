@@ -350,7 +350,7 @@ body {
 
 .primary-description {
   color: #fff;
-  margin-top: 80%;
+  margin-top: 70%;
   font-weight: 100;
 }
 @media (max-width: 992px) {
@@ -390,6 +390,9 @@ body {
   margin-bottom: -1px;
   border: #ccc 1px solid;
   width: 100%;
+}
+.user-form input:focus {
+  position: relative;
 }
 .user-form .input-block-level.input-top {
   border-top-left-radius: 5px;
@@ -433,20 +436,28 @@ body {
   border: none;
 }
 .series-main .thumbnail .cap-icons {
-  float: right;
+  display: block;
+  text-align: right;
+  position: relative;
   z-index: 1;
-  margin-bottom: 5px;
+  height: 70px;
+  line-height: 35px;
+  margin-bottom: -70px;
+  padding-right: 10px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
 }
 .series-main .thumbnail .cap-icons a {
-  color: #ccc;
+  color: #fff;
+}
+.series-main .thumbnail a {
+  color: #6dd0cd;
 }
 .series-main .thumbnail .wrapper {
-  clear: right;
   overflow: hidden;
   position: relative;
-}
-.series-main .thumbnail .wrapper img {
-  position: absolute;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .series-main .thumbnail textarea {
   width: 100%;

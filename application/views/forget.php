@@ -42,8 +42,8 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 			  <form class="user-form" action=<?php echo site_url("users_controller/forget_password"); ?> method="post" name="process" id="sign_form">
-			  	<h6>Change Password</h6>
-				<input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email 信箱" size="25" autofocus="">
+			  	<h6>Forget Password</h6>
+				<input type="text" name="email" id="email" class="input-block-level input-top input-btm" placeholder="Email 信箱" size="25" autofocus="">
 
 				<button class="btn pull-right" type="submit" >重設密碼！</button>
 			  </form>	
