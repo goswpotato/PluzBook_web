@@ -7,8 +7,7 @@
 
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/untitled.css");?>>
-
+	<link rel="stylesheet" href=<?php echo base_url("public_asset/css/screen.css");?>>
 	<link rel="shortcut icon" href=<?php echo base_url("public_asset/favicon.ico");?>>
 
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -17,33 +16,35 @@
 
 	<script>
 
+	function wrapperResize() {
+		$wrapperWidth = $(".wrapper").width();
+		$(".wrapper").height($wrapperWidth);
+		$(".upload input[type='submit']").height($wrapperWidth);
+	}
+
+	$(window).load(wrapperResize);
+	$(window).resize(wrapperResize);
+
 	$(document).ready(function(){
-	  $imgHeight = $(".thumbnail img").height();
-		$(".upload input[type='submit']").height($imgHeight-5);
 
-		$(window).resize(function() {
-		  $imgHeight = $(".thumbnail img").height();
-			$(".upload input[type='submit']").height($imgHeight-5);
-		});
+		wrapperResize;
 
-
-
-		
 		$("a[name='remove']").click(remove_event);
 		$("input[name='submit']").click(check_series_name);
 	});
 
-
 	</script>
-
-	
 
 </head>
 <body>
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    <a class="navbar-brand" href=<?php echo site_url(""); ?> >PluzBook</a>
+
+    <a class="navbar-brand" href=<?php echo site_url(""); ?> >
+    	<img src=<?php echo base_url("public_asset/img/logo_nav.png"); ?> class="logo">
+    	PluzBook
+    </a>
 
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
@@ -54,220 +55,212 @@
 	      </ul>
 	    </li>
     </ul>
+
   </div>
 </nav>
 
 <div class="intro">
-	<h3>我的貼圖系列</h3>
-	<div class="container">
-		<?php
+
+	<div class="container content-container">
 		
-		$i=0;
-		
-		if(isset($series))
-		{
-			
-			foreach ($series as $item)
-			{
-				if($i%4==0)
-				{
-		echo '<div class="row">';
-				}
+		<div class="row">
+			<div class="col-sm-12 series-main">
+
+				<div class="caption">
+					<h4 id="series_name">我的貼圖系列</h4>
+				</div>
+
+				<?php
 				
-			echo '<div class="col-sm-3 col-xs-6">';
-			
-				echo '<form action=';
-				echo site_url("content_controller/series_operation");
-				echo ' method="post" index=';
-				echo $i;
-				echo ' >';
+				$i = 0;
 				
-					echo '<input type="hidden" name="sid" value=';
-					echo $item["id"];
-					echo '>';
-			
-					echo '<div class="thumbnail">';
-						echo '<div class="cap-icons">';
-							echo '<a href=';
-							echo site_url("content_controller/show_series_page/{$item["id"]}");
-							echo ' ><span class="glyphicon glyphicon-pencil"></span></a>';
-							
-							echo '<a href=';
-							echo site_url("content_controller/delete_series/{$item["id"]}");
-							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
-						echo '</div>';
-						echo '<div class="caption">';
-							echo '<h4><a href=';
-							echo site_url("content_controller/show_series_page/{$item["id"]}");
+				if(isset($series))
+				{	
+					foreach ($series as $item)
+					{
+						if($i%4==0)
+						{
+					echo '<div class="row">';
+						}
+						echo '<div class="col-md-3 col-xs-6">';
+				
+							echo '<form action=';
+							echo site_url("content_controller/series_operation");
+							echo ' method="post" index=';
+							echo $i;
 							echo ' >';
-							echo $item["name"];
-							echo '</a></h4>';
-						echo '</div>';
-	
-	
-						echo '<a href=';
-						echo site_url("content_controller/show_series_page/{$item["id"]}");
-						echo ' >';
 						
-				if($item["cover_path"]!="")
-				{
-							echo '<img src=';
-							echo base_url($item["cover_path"]);
+							echo '<input type="hidden" name="sid" value=';
+							echo $item["id"];
 							echo '>';
+					
+							echo '<div class="thumbnail">';
+								echo '<div class="cap-icons">';
+									echo '<a href=';
+									echo site_url("content_controller/show_series_page/{$item["id"]}");
+									echo ' ><span class="glyphicon glyphicon-pencil"></span></a> ';
+									
+									echo '<a href=';
+									echo site_url("content_controller/delete_series/{$item["id"]}");
+									echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
+								echo '</div>';
+			
+								echo '<a href=';
+								echo site_url("content_controller/show_series_page/{$item["id"]}");
+								echo ' >';
+									echo '<div class="wrapper" style="background-image: url(';
+								
+						if($item["cover_path"]!="")
+						{
+									echo base_url($item["cover_path"]);
+						}
+						else
+						{
+									echo base_url("public_asset/img/dummy_img.png");
+						}
+									echo ');"></div>';
+								echo '</a>';
+
+								echo '<p>';
+									echo '<a href=';
+									echo site_url("content_controller/show_series_page/{$item["id"]}");
+									echo ' >';
+									echo $item["name"];
+									echo '</a>';
+								echo '</p>';
+							
+							echo '</div>'; //end of echo <div class="thumbnail">
+					
+						echo '</form>';
+					echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
+					
+						if($i%4==3)
+						{
+				echo '</div>'; // end of <div class="row">
+						}
+										
+						$i++;
+					}
 				}
-				else
+				
+				if($i!=16)
 				{
-							echo '<img src=';
-							echo base_url("public_asset/img/dummy_img.png");
-							echo ' >';
+					if($i%4==0)
+					{
+				echo '<div class="row">';
+					}
+					
+					// if($i==0)
+					// {
+					// 	echo '<div class="col-sm-3 col-xs-6" >';
+					// 		echo '<div class="thumbnail">';
+					// 			echo '<div class="cap-icons">';
+					// 				echo '<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>';
+					// 				echo '<a href="#"><span class="glyphicon glyphicon-remove"></span></a>';
+					// 			echo '</div>';
+					// 			echo '<div class="caption">';
+					// 				echo '<h4><a href="series.html">Example</a></h4>';
+					// 			echo '</div>';
+					// 			echo '<a href="series.html"><img src=';
+					// 			echo base_url("public_asset/img/dummy_img.png");
+					// 			echo ' ></a>';
+					// 		echo '</div>';
+					// 	echo '</div>';
+					// }
+							
+						echo '<div class="col-md-3 col-xs-6 upload">';
+							echo '<div class="thumbnail">';
+								echo '<form action=';
+								echo site_url("content_controller/new_series");
+				        echo ' method="post" accept-charset="utf-8">';
+									echo '<input type="submit" name="submit" value="Upload">';
+									echo '<p>';
+										echo '<input type="text" name="new_series_name" placeholder="New series\' name">';
+									echo '</p>';
+								echo '</form>';
+							echo '</div>';
+						echo '</div>'; // end of <div class="col-sm-3 col-xs-6 upload">		
+				echo '</div>'; // end of <div class="row">
+					
 				}
-						echo '</a>';
+				?>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-12 series-main">
+
+				<div class="caption">
+					<h4 id="series_name">其他貼圖系列</h4>
+				</div>
+
+				<?php	
+					$i=0;
 					
-					echo '</div>'; //end of echo <div class="thumbnail">
+					if(isset($other_series))
+					{
+						foreach ($other_series as $item)
+						{
+							if($i%4==0)
+							{
+						echo '<div class="row">';
+							}
+							
+							echo '<div class="col-md-3 col-xs-6">';
+							
+								echo '<input type="hidden" name="sid" value=';
+								echo $item["id"];
+								echo '>';
+								
+								echo '<div class="thumbnail">';
+									echo '<div class="cap-icons">';
+										echo '<a href=';
+										echo site_url("content_controller/show_series_page/{$item["id"]}");
+										echo ' ><span class="glyphicon glyphicon-pencil"></span></a>';
+									echo '</div>';
+														
+									echo '<a href=';
+									echo site_url("content_controller/show_series_page/{$item["id"]}");
+									echo ' >';
+									echo '<div class="wrapper" style="background-image: url(';
+							
+							if($item["cover_path"] != "")
+							{
+										echo base_url($item["cover_path"]);
+							}
+							else
+							{
+										echo base_url("public_asset/img/dummy_img.png");
+							}
+										echo ');"></div>';
+									echo '</a>';
+
+									echo '<p>';
+										echo '<a href=';
+										echo site_url("content_controller/show_series_page/{$item["id"]}");
+										echo ' >';
+										echo $item["name"];
+										echo '</a>';
+									echo '</p>';
+								
+								echo '</div>'; //end of echo <div class="thumbnail">
+							echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
+								
+							if($i%4==3)
+							{
+								echo '</div>'; // end of <div class="row">
+							}
+
+							$i++;
+						}
+					}
+										
+					?>
 					
-					
-				echo '</form>';
-			echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
-			
-				if($i%4==3)
-				{
-		echo '</div>'; // end of <div class="row">
-				}
-				
-				
-				
-				$i++;
-			}
-		}
-		
-		if($i!=16)
-		{
-			if($i%4==0)
-			{
-		echo '<div class="row">';
-			}
-			
-			
-			if($i==0)
-			{
-				echo '<div class="col-sm-3 col-xs-6" >';
-					echo '<div class="thumbnail">';
-						echo '<div class="cap-icons">';
-							echo '<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>';
-							echo '<a href="#"><span class="glyphicon glyphicon-remove"></span></a>';
-						echo '</div>';
-						echo '<div class="caption">';
-							echo '<h4><a href="series.html">Example</a></h4>';
-						echo '</div>';
-						echo '<a href="series.html"><img src=';
-						echo base_url("public_asset/img/dummy_img.png");
-						echo ' ></a>';
-					echo '</div>';
-				echo '</div>';
-			}
-			
-			
-			echo '<div class="col-sm-3 col-xs-6 upload">';
-				echo '<div class="thumbnail">';
-					echo '<form action=';
-					echo site_url("content_controller/new_series");
-	        		echo ' method="post" accept-charset="utf-8">';
-						echo '<div class="caption">';
-							echo '<h4><input type="text" name="new_series_name" placeholder="New series\' name"></h4>';
-						echo '</div>';
-				
-						echo '<input type="submit" name="submit" value="Upload">';
-					echo '</form>';
-				echo '</div>';
-			echo '</div>'; // end of <div class="col-sm-3 col-xs-6 upload">
-			
-			
-		echo '</div>'; // end of <div class="row">
-			
-		}
-		
-		
-		
-		
-		
-		?>
-		
+			</div>
+		</div>
+
 	</div>
-	
-	<!-- others' series -->
-	<h3>其他人的貼圖系列</h3>
-	<div class="container">
-	<?php	
-		$i=0;
-		
-		if(isset($other_series))
-		{
-			foreach ($other_series as $item)
-			{
-				if($i%4==0)
-				{
-			echo '<div class="row">';
-				}
-				
-				echo '<div class="col-sm-3 col-xs-6">';
-				
-					echo '<input type="hidden" name="sid" value=';
-					echo $item["id"];
-					echo '>';
-					
-					echo '<div class="thumbnail">';
-						echo '<div class="cap-icons">';
-							echo '<a href=';
-							echo site_url("content_controller/show_series_page/{$item["id"]}");
-							echo ' ><span class="glyphicon glyphicon-pencil"></span></a>';
-						echo '</div>';
-						echo '<div class="caption">';
-							echo '<h4><a href=';
-							echo site_url("content_controller/show_series_page/{$item["id"]}");
-							echo ' >';
-							echo $item["name"];
-							echo '</a></h4>';
-						echo '</div>';
-				
-				
-						echo '<a href=';
-						echo site_url("content_controller/show_series_page/{$item["id"]}");
-						echo ' >';
-				
-				if($item["cover_path"]!="")
-				{
-							echo '<img src=';
-							echo base_url($item["cover_path"]);
-							echo '>';
-				}
-				else
-				{
-							echo '<img src=';
-							echo base_url("public_asset/img/dummy_img.png");
-							echo ' >';
-				}
-						echo '</a>';
-					
-					echo '</div>'; //end of echo <div class="thumbnail">
-				echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
-					
-				if($i%4==3)
-				{
-					echo '</div>'; // end of <div class="row">
-				}
-				
-				
-				
-				$i++;
-			}
-		}
-		
-		
-		?>
-		
-	</div>
-	
-	
 	
 </div>
 

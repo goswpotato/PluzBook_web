@@ -57,7 +57,7 @@
 			  <form class="user-form" action=<?php echo site_url("users_controller/send_signup"); ?> method="post" name="process" id="sign_form">
 			  	<h6>Sign up</h6>
 			    <input type="text" name="email" id="email" class="input-block-level input-top" placeholder="Email 信箱" size="25" autofocus="">
-			    <input type="password" name="password" id="password" class="input-block-level input-btm" placeholder="密碼" size="25">
+			    <input type="password" name="password" id="password" class="input-block-level" placeholder="密碼" size="25">
 			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="重新輸入密碼" size="25">
 
 				<button class="btn pull-right" type="button" onclick="check_signup()" >註冊！</button>

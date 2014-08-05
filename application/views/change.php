@@ -56,8 +56,8 @@
 			<div class="col-xs-12 col-sm-4 col-sm-offset-4">
 			  <form class="user-form" action=<?php echo site_url("users_controller/change_password"); ?> method="post" name="process" id="sign_form">
 			  	<h6>Change Password</h6>
-			    <input type="password" name="old_password" class="input-block-level input-btm" placeholder="舊密碼" size="25">
-			    <input type="password" name="new_password" id="password" class="input-block-level input-btm" placeholder="新密碼" size="25">
+			    <input type="password" name="old_password" class="input-block-level input-top" placeholder="舊密碼" size="25">
+			    <input type="password" name="new_password" id="password" class="input-block-level" placeholder="新密碼" size="25">
 			    <input type="password" name="re_password" id="re_password" class="input-block-level input-btm" placeholder="重新輸入新密碼" size="25">
 
 				<button class="btn pull-right" type="submit" >更改！</button>
