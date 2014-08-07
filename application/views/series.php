@@ -12,6 +12,7 @@
 
 	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src=<?php echo base_url("public_asset/js/series.js"); ?>></script>
 
 	<script>
@@ -50,8 +51,6 @@
 					textarea_object.val("");
 					textarea_object.focus();
 					textarea_object.val(text);
-					
-					//textarea_object.attr("temp_save", text);????
 					
 					$(this).attr("status", "editing");
 				}
@@ -223,7 +222,137 @@
 			}
 		});
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		function single_select()
+		{
+			if($(this).hasClass("ui-selected"))
+			{
+				$(".ui-selected").removeClass("ui-selected");
+			}
+			else
+			{
+				$(".ui-selected").removeClass("ui-selected");
+				$(this).addClass("ui-selected");
+			}
+		}
+		
+		function multi_select()
+		{
+			$(this).toggleClass("ui-selected");
+		}
+		
+		$("#cover_button").click(function(){
+			if($("#cover_button").val()=="換封面!!")
+			{
+				$(".ui-selected").removeClass("ui-selected");
+			
+				$("div[name='image_container']").children().bind({
+					click: single_select
+				});
+				
+				$("#cover_button").val("確定or取消");
+			}
+			else if($("#cover_button").val()=="確定or取消")
+			{
+				if( $(".ui-selected").length == 0)
+				{
+					return;
+				}
+			
+				var series_id;
+				var image_id;
+				series_id = <?php echo $series["id"]; ?>;
+				image_id = $(".ui-selected").children("input[name='iid']").val();
+			
+				// Ajax by jQuery		
+				$.ajax(
+					{
+						url: '<?php echo site_url("content_controller/change_series_cover"); ?>',
+						data: {iid: image_id, sid: series_id},
+						type: "POST",
+						async: true,
+						dataType: "text",
+						success: function(description)
+						{
+							alert("換好了!!");
+						},
+						error: function(xhr, ajaxOptions, thrownError)
+						{
+							alert("更換失敗......");
+						},
+					}
+				);
+				
+				$("div[name='image_container']").children().unbind("click");
+				
+				$("#cover_button").val("換封面!!");
+			}
+		
+		});
+		
+		
+		$("#multi_delete_button").click(function(){
+			if($("#multi_delete_button").val()=="刪除多張")
+			{
+				$(".ui-selected").removeClass("ui-selected");
+			
+				$("div[name='image_container']").children().bind({
+					click: multi_select
+				});
+				
+				$("#multi_delete_button").val("刪除or取消");
+			}
+			else if($("#multi_delete_button").val()=="刪除or取消")
+			{
+				if( $(".ui-selected").length <= 0)
+				{
+					$("#multi_delete_button").val("刪除多張");
+					$("div[name='image_container']").children().unbind("click");
+					return;
+				}
+				
+				if(!confirm("Are you sure to delete these images?"))
+				{
+					return;
+				}
+				
+				$("div[name='image_container']").children().unbind("click");
+			
+				var series_id;
+				var image_ids;
+				series_id = <?php echo $series["id"]; ?>;
+				image_ids = $(".ui-selected").children("input[name='iid']").map(function(){
+					return $(this).val();
+				}).get();
+				
+				
+				$('<form action="<?php echo site_url("content_controller/delete_images"); ?>" method="post" id="multi_delete_form"></form>').appendTo("body");
+
+				$('<input type="hidden" name="sid" value=' + series_id + ' />').appendTo("#multi_delete_form");
+				for(var key in image_ids)
+				{
+					$('<input type="hidden" name="iids[]" value=' + image_ids[key] + ' />').appendTo("#multi_delete_form");
+				}
+				
+				$("#multi_delete_form").submit();
+				
+				$("#multi_delete_button").val("刪除多張");
+			}
+		});
+		
+		
 	}); // end of $(document).ready(function(){
+	
+	
 	
 	</script>
 
@@ -300,6 +429,11 @@
 				}
 				
 				?>
+				
+				<input type="button" value="換封面!!" style="color: #FFF; background: #6DD0CD; border: none; width: 100%; height: 40px;" id="cover_button" ></input>
+				<input type="button" value="刪除多張" style="color: #FFF; background: #6DD0CD; border: none; width: 100%; height: 40px;" id="multi_delete_button" ></input>
+				
+				
 			</div>
 
 			<div class="col-sm-9 series-main">
@@ -307,14 +441,10 @@
 			  
 			  if(isset($images) && isset($series))
 			  {
-			  	echo '<div class="row">';
+			  	echo '<div class="row" name="image_container">';
 			  	foreach ($images as $key=>$image)
 			  	{
 						echo '<div class="col-md-3 col-xs-6">';
-						
-						echo '<form action=';
-						echo site_url("content_controller/image_operation");
-						echo ' method="post" >';
 				
 						echo '<input type="hidden" name="iid" value=';
 						echo $image["id"];
@@ -358,8 +488,7 @@
 			  		echo $image["description"];
 						echo '</p>';
 				  	echo '</div>';
-			  	
-			  		echo '</form>';			  	
+
 						echo '</div>';
 
 						if ($key%4 == 3) {

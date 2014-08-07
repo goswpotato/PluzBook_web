@@ -119,7 +119,7 @@ class Content_model extends CI_Model
 		$content_query= $this->db->query(
 			"
 			INSERT INTO series (name, uid, cover_id, cover_path, public)
-			VALUES ('{$series_name}', {$user_id}, -1, '', 'private');
+			VALUES ('{$series_name}', {$user_id}, -1, '', '只有我');
 			"
 		);
 		
@@ -388,7 +388,7 @@ class Content_model extends CI_Model
 			"
 			SELECT name
 			FROM series
-			WHERE id={$series_id}
+			WHERE id={$series_id};
 			"
 		)->row_array();
 		$old_hash=md5($old_name["name"]);
@@ -397,7 +397,7 @@ class Content_model extends CI_Model
 			"
 			UPDATE series
 			SET name = '{$new_name}'
-			WHERE id={$series_id}
+			WHERE id={$series_id};
 			"
 		);
 		
@@ -412,14 +412,46 @@ class Content_model extends CI_Model
 				"
 				UPDATE images
 				SET path = 'images/{$owner_hash}/{$new_hash}/{$image["file_name"]}.{$image["ext"]}'
-				WHERE id={$image["id"]}
+				WHERE id={$image["id"]};
 				"
 			);
 		}
 	}
 	
-	function change_series_cover($series_id, $image_path)
+	
+	function change_series_cover($series_id, $image_id)
 	{
+		$series=$this->db->query(
+			"
+			SELECT *
+			FROM series
+			WHERE id={$series_id};
+			"
+		)->row_array();
+		
+		if($image_id != $series["cover_id"])
+		{
+			$image=$this->db->query(
+				"
+				SELECT *
+				FROM images
+				WHERE id={$image_id};
+				"
+			)->row_array();
+			
+			if($image["sid"] != $series_id)
+			{
+				return;
+			}
+			
+			$this->db->query(
+				"
+				UPDATE series
+				SET cover_id = {$image_id}, cover_path = '{$image["path"]}'
+				WHERE id={$series_id};
+				"
+			);
+		}
 	}
 	
 	function change_auth($series_id, $auth)
@@ -428,11 +460,10 @@ class Content_model extends CI_Model
 			"
 			UPDATE series
 			SET public = '{$auth}'
-			WHERE id={$series_id}
+			WHERE id={$series_id};
 			"
 		);
 	}
-	
 	
 }
 	

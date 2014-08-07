@@ -96,9 +96,9 @@
 					
 							echo '<div class="thumbnail">';
 								echo '<div class="cap-icons">';
-									echo '<a href=';
+									echo '<a href="';
 									echo site_url("content_controller/show_series_page/{$item["id"]}");
-									echo ' ><span class="glyphicon glyphicon-pencil"></span></a> ';
+									echo '" ><span class="glyphicon glyphicon-pencil"></span></a> ';
 									
 									echo '<a href=';
 									echo site_url("content_controller/delete_series/{$item["id"]}");
@@ -262,6 +262,8 @@
 
 	</div>
 	
+</div>
+
 </div>
 
 <nav class="navbar navbar-default footer" role="navigation">

@@ -47,7 +47,6 @@ class Content_controller extends CI_Controller
 		$data["images"]=$this->Content_model->get_images($series_id);
 		$data["series"]=$this->Content_model->get_single_series($series_id);
 		
-		
 		if($data["series"]["uid"]==$_SESSION["uid"])
 		{
 			$data["is_owner"]=true;
@@ -152,14 +151,18 @@ class Content_controller extends CI_Controller
 		$this->delete_images($sid, $iids);
 	}
 	
-	function delete_images($series_id, $image_ids)
+	function delete_images()
 	{
 		// still needed to be edited
+		
+		$series_id = $_POST["sid"];
+		$image_ids = $_POST["iids"];
 		
 		$this->Content_model->delete_images($series_id, $image_ids);
 		
 		redirect("content_controller/show_series_page/{$series_id}", "location");
 	}
+	
 	
 	function change_series_name()
 	{
@@ -171,6 +174,10 @@ class Content_controller extends CI_Controller
 	
 	function change_series_cover()
 	{
+		$series_id=$_POST["sid"];
+		$image_id=$_POST["iid"];
+		
+		$this->Content_model->change_series_cover($series_id, $image_id);
 	}
 	
 	function change_auth()
