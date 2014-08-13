@@ -83,16 +83,10 @@
 					echo '<div class="row">';
 						}
 						echo '<div class="col-md-3 col-xs-6">';
-				
-							echo '<form action=';
-							echo site_url("content_controller/series_operation");
-							echo ' method="post" index=';
-							echo $i;
-							echo ' >';
 						
 							echo '<input type="hidden" name="sid" value=';
 							echo $item["id"];
-							echo '>';
+							echo ' ></input>';
 					
 							echo '<div class="thumbnail">';
 								echo '<div class="cap-icons">';
@@ -131,7 +125,6 @@
 							
 							echo '</div>'; //end of echo <div class="thumbnail">
 					
-						echo '</form>';
 					echo '</div>'; // end of echo <div class="col-sm-3 col-xs-6">;
 					
 						if($i%4==3)
@@ -149,43 +142,25 @@
 					{
 				echo '<div class="row">';
 					}
-					
-					// if($i==0)
-					// {
-					// 	echo '<div class="col-sm-3 col-xs-6" >';
-					// 		echo '<div class="thumbnail">';
-					// 			echo '<div class="cap-icons">';
-					// 				echo '<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>';
-					// 				echo '<a href="#"><span class="glyphicon glyphicon-remove"></span></a>';
-					// 			echo '</div>';
-					// 			echo '<div class="caption">';
-					// 				echo '<h4><a href="series.html">Example</a></h4>';
-					// 			echo '</div>';
-					// 			echo '<a href="series.html"><img src=';
-					// 			echo base_url("public_asset/img/dummy_img.png");
-					// 			echo ' ></a>';
-					// 		echo '</div>';
-					// 	echo '</div>';
-					// }
 							
-						echo '<div class="col-md-3 col-xs-6 upload">';
-							echo '<div class="thumbnail">';
-								echo '<form action=';
-								echo site_url("content_controller/new_series");
-				        echo ' method="post" accept-charset="utf-8">';
-									echo '<input type="submit" name="submit" value="Upload">';
-									echo '<p>';
-										echo '<input type="text" name="new_series_name" placeholder="New series\' name">';
-									echo '</p>';
-								echo '</form>';
-							echo '</div>';
-						echo '</div>'; // end of <div class="col-sm-3 col-xs-6 upload">		
+					echo '<div class="col-md-3 col-xs-6 upload">';
+						echo '<div class="thumbnail">';
+							echo '<form action=';
+							echo site_url("content_controller/new_series");
+					echo ' method="post" accept-charset="utf-8">';
+								echo '<input type="submit" name="submit" value="Upload">';
+								echo '<p>';
+									echo '<input type="text" name="new_series_name" placeholder="New series\' name">';
+								echo '</p>';
+							echo '</form>';
+						echo '</div>';
+					echo '</div>'; // end of <div class="col-sm-3 col-xs-6 upload">		
 				echo '</div>'; // end of <div class="row">
 					
 				}
 				?>
-			</div>
-		</div>
+			</div><!-- end of <div class="col-sm-12 series-main"> -->
+		</div> <!-- end of <div class="row"> -->
 	
 		<div class="row">
 			<div class="col-sm-12 series-main">
@@ -253,18 +228,21 @@
 
 							$i++;
 						}
+						
+						if($i%4!=0)
+						{
+								echo '</div>'; // end of <div class="row">
+						}
 					}
 										
 					?>
 					
-			</div>
-		</div>
+			</div><!-- end of <div class="col-sm-12 series-main"> -->
+		</div> <!-- end of <div class="row"> -->
 
-	</div>
+	</div> <!-- end of <div class="container content-container"> -->
 	
-</div>
-
-</div>
+</div> <!-- end of <div class="intro"> -->
 
 <nav class="navbar navbar-default footer" role="navigation">
   <div class="container text-center">
