@@ -15,6 +15,11 @@
 	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 	<script src=<?php echo base_url("public_asset/js/series.js"); ?>></script>
 
+	
+	<style>
+		div.ui-selected{ background: #F39814; }
+	</style>
+	
 	<script>
 
 	function wrapperResize() {
@@ -265,6 +270,7 @@
 			{
 				if( $(".ui-selected").length == 0)
 				{
+					$("#cover_button").val("換封面!!");
 					return;
 				}
 			

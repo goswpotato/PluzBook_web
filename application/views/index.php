@@ -101,7 +101,7 @@
 				</div>
 				<div class="row intro-btns">
 					<div class="col-xs-6 app-download">
-						<a href="#"><img src=<?php echo base_url("public_asset/img/google_play.png"); ?> ></a>
+						<a href="https://play.google.com/store/apps/details?id=com.pluzlab.pluzbookQQ"><img src=<?php echo base_url("public_asset/img/google_play.png"); ?> ></a>
 					</div>
 					<div class="col-xs-6">
 						<a href=<?php echo site_url("content_controller/show_content_page"); ?>><img src=<?php echo base_url("public_asset/img/upload_series.png"); ?> ></a>
