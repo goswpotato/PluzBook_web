@@ -455,32 +455,33 @@
 						echo '>';	
 			
 				  	echo '<div class="thumbnail">';
-			  		echo '<div class="cap-icons">';
-			  		//echo '<input type="button" name="edit" status="done" ><span class="glyphicon glyphicon-pencil"></span></input>';
-			  		//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
 
-						if($series["public"]=="public" || (isset($is_owner) && $is_owner))
-						{
-							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a> ';
-							echo '<a href=';
-							echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
-							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
-						}
-						else if($series["public"]=="editable")
-						{
-							echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
-						}
-						else if($series["public"]=="deletable")
-						{
-							echo '<a href=';
-							echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
-							echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
-						}
-						else if($series["public"]=="private")
-						{
+				  	if ($series["public"]!="private")
+				  	{
+				  		echo '<div class="cap-icons">';
+				  		//echo '<input type="button" name="edit" status="done" ><span class="glyphicon glyphicon-pencil"></span></input>';
+				  		//echo '<input type="submit" name="remove" ><span class="glyphicon glyphicon-remove"></span></input>';
+
+							if($series["public"]=="public" || (isset($is_owner) && $is_owner))
+							{
+								echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a> ';
+								echo '<a href=';
+								echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
+								echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
+							}
+							else if($series["public"]=="editable")
+							{
+								echo '<a name="edit" href="#" status="done" ><span class="glyphicon glyphicon-pencil"></span></a>';
+							}
+							else if($series["public"]=="deletable")
+							{
+								echo '<a href=';
+								echo site_url("content_controller/delete_image/{$series["id"]}/{$image["id"]}");// ??????
+								echo ' name="remove" ><span class="glyphicon glyphicon-remove"></span></a>';
+							}
+							echo '</div>';
 						}
 						
-			  		echo '</div>';
 						echo '<div class="wrapper" style="background-image: url(';
 						echo base_url($image["path"]);
 						echo ');"></div>';

@@ -141,7 +141,7 @@ body {
 
 .primary-description {
 	color: #fff;
-	margin-top: 70%;
+	margin-top: 60%;
 	font-weight: 100;
 
 	@media (max-width: $break-md) {
@@ -238,7 +238,7 @@ body {
 		border: none;
 
 		.cap-icons {
-			display: block;
+			display: none;
 			text-align: right;
 			position: relative;
 			z-index: 1;
@@ -246,10 +246,14 @@ body {
 			line-height: 35px;
 			margin-bottom: -70px;
 			padding-right: 10px;
-			background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0));
+			background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0));
 			a {
 				color: #fff;
 			}
+		}
+
+		&:hover .cap-icons {
+			display: block;
 		}
 
 		a {
